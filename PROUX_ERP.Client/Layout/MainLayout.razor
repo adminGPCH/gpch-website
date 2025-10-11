@@ -1,0 +1,53 @@
+﻿<!-- D:\GPCH\APP\PROUX_ERP.Client\Layout\MainLayout.razor -->
+@inherits LayoutComponentBase
+@using PROUX_ERP.Shared.Models
+@using PROUX_ERP.Client.Services
+@inject UserService UserService
+
+<div class="page">
+    <div class="sidebar">
+        <NavMenu />
+    </div>
+
+    <main>
+        <div class="top-row px-4 auth d-flex justify-content-between align-items-center">
+            <a href="https://learn.microsoft.com/aspnet/core/" target="_blank">About</a>
+            @if (user is not null)
+            {
+                <UserBanner User="@user" />
+            }
+            else
+            {
+                <!-- Si no hay sesión, no mostramos nada en el banner -->
+                <span class="text-muted small">No autenticado</span>
+            }
+        </div>
+
+        <article class="content px-4">
+            @Body
+        </article>
+    </main>
+</div>
+
+@code {
+    private UserInfo? user;
+
+    protected override async Task OnInitializedAsync()
+    {
+        await LoadUserAsync();
+    }
+
+    private async Task LoadUserAsync()
+    {
+        try
+        {
+            user = await UserService.GetUserAsync();
+        }
+        catch
+        {
+            user = null; // fallback seguro
+        }
+
+        StateHasChanged(); // asegura refresco de UI
+    }
+}

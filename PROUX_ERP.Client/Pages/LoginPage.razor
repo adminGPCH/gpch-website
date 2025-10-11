@@ -1,0 +1,73 @@
+﻿<!-- D:\GPCH\APP\PROUX_ERP.Client\Pages\LoginPage.razor -->
+@page "/"
+@layout LoginLayout
+@using PROUX_ERP.Shared.Models
+@using PROUX_ERP.Client.Services
+@inject UserService UserService
+@inject NavigationManager Navigation
+
+<link href="css/login.css" rel="stylesheet" />
+
+<div class="login-container">
+    <div class="login-card">
+        <img src="images/logo_gpch-solo-t.png" alt="GPCH Logo" class="logo" />
+
+        <h2>Bienvenido a</h2>
+        <h1 class="brand">Proux - ERP</h1>
+        <p class="subtitle">Una plataforma integral para la gestión GPCH</p>
+
+        @if (isChecking)
+        {
+            <p class="status">Verificando sesión...</p>
+        }
+        else if (user is not null)
+        {
+            <p class="status">
+                Sesión activa como <strong>@user.Name</strong> (@user.Email)
+            </p>
+            <p class="status">Redirigiendo al reino...</p>
+        }
+        else
+        {
+            <button class="btn-login" @onclick="Login">INICIAR SESIÓN</button>
+        }
+    </div>
+</div>
+
+@code {
+    private UserInfo? user;
+    private bool isChecking = true;
+
+    protected override async Task OnInitializedAsync()
+    {
+        try
+        {
+            // ✅ Consultamos al backend si hay sesión activa
+            user = await UserService.GetUserAsync();
+
+            // ✅ Si hay sesión → redirigimos a Home
+            if (user is not null)
+            {
+                Navigation.NavigateTo("/home", forceLoad: true);
+                return; // evita parpadeo
+            }
+        }
+        catch
+        {
+            // ❌ Si ocurre error (ej: backend caído) → tratamos como sin sesión
+            user = null;
+        }
+        finally
+        {
+            // ✅ Terminamos la verificación
+            isChecking = false;
+            StateHasChanged();
+        }
+    }
+
+    private void Login()
+    {
+        // ✅ Login por navegación completa → no depende de CORS
+        Navigation.NavigateTo("https://localhost:7057/api/auth/login", forceLoad: true);
+    }
+}

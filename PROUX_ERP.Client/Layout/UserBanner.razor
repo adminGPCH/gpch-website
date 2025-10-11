@@ -1,0 +1,22 @@
+﻿<!-- D:\GPCH\APP\PROUX_ERP.Client\Layout\UserBanner.razor -->
+@using PROUX_ERP.Shared.Models
+@inject NavigationManager Navigation
+
+@code {
+    [Parameter]
+    public UserInfo? User { get; set; }
+
+    private void Logout()
+    {
+        // Logout siempre por navegación completa
+        Navigation.NavigateTo("https://localhost:7057/api/auth/logout", forceLoad: true);
+    }
+}
+
+@if (User is not null)
+{
+    <div class="user-banner">
+        <strong>@User.Name</strong> (@User.Email)
+        <button class="btn-link" @onclick="Logout">Cerrar sesión</button>
+    </div>
+}
