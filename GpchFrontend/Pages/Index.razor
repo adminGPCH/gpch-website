@@ -1,0 +1,63 @@
+﻿@page "/"
+@inject HttpClient Http
+
+<h1>Formulario de contacto (HTML funcional)</h1>
+
+<form>
+    <label for="nombre">Nombre:</label><br />
+    <input type="text" id="nombre" @ref="nombreRef" /><br /><br />
+
+    <label for="email">Email:</label><br />
+    <input type="email" id="email" @ref="emailRef" /><br /><br />
+
+    <label for="mensaje">Mensaje:</label><br />
+    <textarea id="mensaje" @ref="mensajeRef"></textarea><br /><br />
+
+    <button type="button" @onclick="Enviar">Enviar</button>
+</form>
+
+@if (!string.IsNullOrEmpty(respuesta))
+{
+    <p>@respuesta</p>
+}
+
+@code {
+    private ElementReference nombreRef;
+    private ElementReference emailRef;
+    private ElementReference mensajeRef;
+
+    private string? respuesta;
+
+    private async Task Enviar()
+    {
+        var nombre = await JS.InvokeAsync<string>("getValue", nombreRef);
+        var email = await JS.InvokeAsync<string>("getValue", emailRef);
+        var mensaje = await JS.InvokeAsync<string>("getValue", mensajeRef);
+
+        var datos = new MailRequest
+        {
+            Name = nombre,
+            Email = email,
+            Message = mensaje
+        };
+
+        try
+        {
+            var response = await Http.PostAsJsonAsync("mail/send", datos);
+            respuesta = await response.Content.ReadAsStringAsync();
+        }
+        catch (Exception ex)
+        {
+            respuesta = $"Error al enviar: {ex.Message}";
+        }
+    }
+
+    public class MailRequest
+    {
+        public string Name { get; set; } = string.Empty;
+        public string Email { get; set; } = string.Empty;
+        public string Message { get; set; } = string.Empty;
+    }
+
+    [Inject] private IJSRuntime JS { get; set; } = default!;
+}
