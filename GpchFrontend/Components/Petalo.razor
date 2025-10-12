@@ -1,0 +1,23 @@
+﻿@using Microsoft.AspNetCore.Components
+
+<g transform="@Transform"
+   @onmouseover="() => OnHover.InvokeAsync(Id)"
+   @onmouseout="() => OnHover.InvokeAsync(null)">
+    <path d="M110,110 Q60,70 110,10 Q160,70 110,110 Z"
+          fill="@Color"
+          class="petalo"
+          role="button"
+          aria-label="Seleccionar tema @Id"
+          @onclick="() => OnClick.InvokeAsync(Id)" />
+</g>
+
+@code {
+    [Parameter] public string Id { get; set; } = string.Empty;
+    [Parameter] public string Color { get; set; } = "#ccc";
+    [Parameter] public int Rotation { get; set; }
+    [Parameter] public bool IsActive { get; set; }
+    [Parameter] public EventCallback<string?> OnHover { get; set; }
+    [Parameter] public EventCallback<string> OnClick { get; set; }
+
+    private string Transform => $"translate(110,110) rotate({Rotation}) scale({(IsActive ? 1.1 : 1.0)}) translate(-110,-110)";
+}

@@ -1,63 +1,36 @@
 ﻿@page "/"
 @inject HttpClient Http
+@inject NavigationManager Navigation
+@using GpchFrontend.Components
 
-<h1>Formulario de contacto (HTML funcional)</h1>
+<link href="css/login.css" rel="stylesheet" />
+<link href="css/contactform.css" rel="stylesheet" />
 
-<form>
-    <label for="nombre">Nombre:</label><br />
-    <input type="text" id="nombre" @ref="nombreRef" /><br /><br />
+<div class="gpch-page">
+    <section class="gpch-bloque">
+        <img src="images/logo_gpch-solo-t.png" alt="GPCH Logo" class="logo" />
+        <h2 class="brand">Goerlich Pharma Chile Ltda.</h2>
+        <p class="subtitle">Explora nuestras áreas a través del menú floral interactivo</p>
 
-    <label for="email">Email:</label><br />
-    <input type="email" id="email" @ref="emailRef" /><br /><br />
+        <div class="flower-container">
+            <ThemeFlower Size="300" />
+        </div>
+    </section>
 
-    <label for="mensaje">Mensaje:</label><br />
-    <textarea id="mensaje" @ref="mensajeRef"></textarea><br /><br />
-
-    <button type="button" @onclick="Enviar">Enviar</button>
-</form>
-
-@if (!string.IsNullOrEmpty(respuesta))
-{
-    <p>@respuesta</p>
-}
+</div>
 
 @code {
-    private ElementReference nombreRef;
-    private ElementReference emailRef;
-    private ElementReference mensajeRef;
-
-    private string? respuesta;
-
-    private async Task Enviar()
+    private async Task EnviarCorreo(FormularioContacto.MailRequest datos)
     {
-        var nombre = await JS.InvokeAsync<string>("getValue", nombreRef);
-        var email = await JS.InvokeAsync<string>("getValue", emailRef);
-        var mensaje = await JS.InvokeAsync<string>("getValue", mensajeRef);
-
-        var datos = new MailRequest
-        {
-            Name = nombre,
-            Email = email,
-            Message = mensaje
-        };
-
         try
         {
             var response = await Http.PostAsJsonAsync("mail/send", datos);
-            respuesta = await response.Content.ReadAsStringAsync();
+            var resultado = await response.Content.ReadAsStringAsync();
+            Console.WriteLine($"Respuesta del servidor: {resultado}");
         }
         catch (Exception ex)
         {
-            respuesta = $"Error al enviar: {ex.Message}";
+            Console.WriteLine($"Error al enviar: {ex.Message}");
         }
     }
-
-    public class MailRequest
-    {
-        public string Name { get; set; } = string.Empty;
-        public string Email { get; set; } = string.Empty;
-        public string Message { get; set; } = string.Empty;
-    }
-
-    [Inject] private IJSRuntime JS { get; set; } = default!;
 }

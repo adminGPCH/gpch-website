@@ -1,0 +1,107 @@
+﻿/* contactform.css — Estilos para FormularioContacto.razor */
+
+.formulario-wrapper {
+    display: flex;
+    justify-content: center;
+    padding: 2rem;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.formulario-card {
+    width: 100%;
+    max-width: 600px;
+    background: #fff;
+    padding: 2rem;
+    border-radius: 12px;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.1);
+    box-sizing: border-box;
+    font-family: 'Segoe UI', system-ui, sans-serif;
+}
+
+.formulario-field {
+    margin-bottom: 20px;
+    display: flex;
+    flex-direction: column;
+}
+
+    .formulario-field label {
+        margin-bottom: 6px;
+        font-weight: 600;
+        color: #333;
+        font-size: 0.95rem;
+    }
+
+    .formulario-field input,
+    .formulario-field textarea {
+        width: 100%;
+        padding: 0.75rem;
+        font-size: 1rem;
+        border: 1px solid #ccc;
+        border-radius: 6px;
+        box-sizing: border-box;
+        font-family: inherit;
+        transition: border-color 0.2s ease;
+    }
+
+        .formulario-field input:focus,
+        .formulario-field textarea:focus {
+            border-color: #1976d2;
+            outline: none;
+        }
+
+    .formulario-field textarea {
+        resize: vertical;
+        min-height: 100px;
+    }
+
+.formulario-button {
+    margin-top: 30px;
+    position: relative;
+}
+
+    .formulario-button button {
+        width: 100%;
+        padding: 0.9rem;
+        font-size: 1rem;
+        background-color: #1976d2;
+        color: white;
+        border: none;
+        border-radius: 6px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: background 0.25s ease;
+    }
+
+        .formulario-button button:hover {
+            background-color: #1565c0;
+        }
+
+.formulario-feedback {
+    position: absolute;
+    top: -40px;
+    left: 0;
+    padding: 6px 12px;
+    border-radius: 6px;
+    font-weight: 600;
+    white-space: nowrap;
+    box-shadow: 2px 2px 6px rgba(0,0,0,0.3);
+    font-size: 0.95rem;
+}
+
+    .formulario-feedback.error {
+        background-color: orange;
+        color: white;
+    }
+
+    .formulario-feedback.success {
+        background-color: #4caf50;
+        color: white;
+    }
+
+.contador-caracteres {
+    text-align: right;
+    font-size: 0.85rem;
+    color: #888;
+    margin-top: 4px;
+}

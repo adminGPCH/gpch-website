@@ -1,0 +1,31 @@
+﻿
+.gpch-appbar {
+    background-color: #2f538e;
+    color: white;
+    padding: 12px 24px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.appbar-content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.appbar-logo {
+    height: 40px;
+}
+
+.appbar-nav a {
+    margin-left: 20px;
+    color: white;
+    text-decoration: none;
+    font-weight: 500;
+}
+
+    .appbar-nav a:hover {
+        text-decoration: underline;
+    }

@@ -1,0 +1,152 @@
+﻿<script>
+    window.setValue = (element, value) => {
+        if (element) element.value = value;
+    };
+</script>
+
+@using Microsoft.JSInterop
+@inject IJSRuntime JS
+
+<div class="formulario-wrapper">
+    <form class="formulario-card">
+        <div class="formulario-field">
+            <label for="nombre">Nombre:</label>
+            <GPCHTooltip Text="Indique su nombre o el de su Organización" Placement="right">
+                <input type="text" id="nombre" @ref="nombreRef" @onfocus="OcultarMensajes" />
+            </GPCHTooltip>
+        </div>
+
+        <div class="formulario-field">
+            <label for="email">Email:</label>
+            <GPCHTooltip Text="Indique su correo electrónico" Placement="right">
+                <input type="email" id="email" @ref="emailRef" @onfocus="OcultarMensajes" />
+            </GPCHTooltip>
+        </div>
+
+        <div class="formulario-field">
+            <label for="mensaje">Mensaje:</label>
+            <GPCHTooltip Text="Indique su mensaje" Placement="right">
+                <textarea id="mensaje"
+                          maxlength="500"
+                          @ref="mensajeRef"
+                          @oninput="ActualizarContador"
+                          @onfocus="OcultarMensajes"></textarea>
+            </GPCHTooltip>
+            <div class="contador-caracteres">@CaracteresMensaje/500</div>
+        </div>
+
+        <div class="formulario-button">
+            <button type="button" @onclick="Enviar">Enviar</button>
+
+            @if (!string.IsNullOrEmpty(MensajeError))
+            {
+                <div class="formulario-feedback error">@MensajeError</div>
+            }
+
+            @if (!string.IsNullOrEmpty(MensajeExito))
+            {
+                <div class="formulario-feedback success">@MensajeExito</div>
+            }
+        </div>
+    </form>
+</div>
+
+@code {
+    private ElementReference nombreRef;
+    private ElementReference emailRef;
+    private ElementReference mensajeRef;
+
+    [Parameter] public EventCallback<MailRequest> OnEnviar { get; set; }
+
+    private string? MensajeError;
+    private string? MensajeExito;
+    private int CaracteresMensaje = 0;
+
+    private async Task Enviar()
+    {
+        var nombre = await JS.InvokeAsync<string>("getValue", nombreRef);
+        var email = await JS.InvokeAsync<string>("getValue", emailRef);
+        var mensaje = await JS.InvokeAsync<string>("getValue", mensajeRef);
+
+        CaracteresMensaje = mensaje.Length;
+
+        if (string.IsNullOrWhiteSpace(nombre) || string.IsNullOrWhiteSpace(email) || string.IsNullOrWhiteSpace(mensaje))
+        {
+            MensajeError = "Por favor complete todos los campos antes de enviar.";
+            MensajeExito = null;
+
+            _ = Task.Run(async () =>
+            {
+                await Task.Delay(2000);
+                MensajeError = null;
+                await InvokeAsync(StateHasChanged);
+            });
+
+            return;
+        }
+
+        if (!EmailValido(email))
+        {
+            MensajeError = "El correo electrónico no tiene un formato válido.";
+            MensajeExito = null;
+
+            _ = Task.Run(async () =>
+            {
+                await Task.Delay(3000);
+                MensajeError = null;
+                await InvokeAsync(StateHasChanged);
+            });
+
+            return;
+        }
+
+        MensajeError = null;
+
+        var datos = new MailRequest
+        {
+            Name = nombre,
+            Email = email,
+            Message = mensaje
+        };
+
+        await OnEnviar.InvokeAsync(datos);
+        MensajeExito = "Correo enviado correctamente desde GPCH.cl";
+
+        await JS.InvokeVoidAsync("setValue", nombreRef, "");
+        await JS.InvokeVoidAsync("setValue", emailRef, "");
+        await JS.InvokeVoidAsync("setValue", mensajeRef, "");
+
+        CaracteresMensaje = 0;
+
+        _ = Task.Run(async () =>
+        {
+            await Task.Delay(5000);
+            MensajeExito = null;
+            await InvokeAsync(StateHasChanged);
+        });
+    }
+
+    private void ActualizarContador(ChangeEventArgs e)
+    {
+        CaracteresMensaje = e.Value?.ToString()?.Length ?? 0;
+    }
+
+    private void OcultarMensajes()
+    {
+        MensajeError = null;
+        MensajeExito = null;
+    }
+
+    private bool EmailValido(string email)
+    {
+        return System.Text.RegularExpressions.Regex.IsMatch(email,
+            @"^[^@\s]+@[^@\s]+\.[^@\s]+$");
+    }
+
+    public class MailRequest
+    {
+        public string Name { get; set; } = string.Empty;
+        public string Email { get; set; } = string.Empty;
+        public string Message { get; set; } = string.Empty;
+    }
+}

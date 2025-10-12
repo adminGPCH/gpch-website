@@ -1,0 +1,72 @@
+﻿<div style="position: relative; display: inline-block; min-width: 1px; min-height: 1px;"
+     @onmouseover="() => Show = true"
+     @onmouseout="() => Show = false">
+    @ChildContent
+
+    @if (Show)
+    {
+        <div style="@TooltipStyle">
+            @Text
+            <div style="@ArrowStyle"></div>
+        </div>
+    }
+</div>
+
+@code {
+    [Parameter] public string Text { get; set; } = string.Empty;
+    [Parameter] public RenderFragment? ChildContent { get; set; }
+    [Parameter] public string Placement { get; set; } = "top";
+    [Parameter] public string Color { get; set; } = "#1976d2";
+
+    private bool Show = false;
+
+    private string TooltipStyle => Placement switch
+    {
+        "top" => $"position: absolute; bottom: 100%; left: 50%; transform: translateX(-50%);" +
+                 $"background-color: {Color}; color: #fff; font-size:13px; font-weight:500;" +
+                 "padding: 6px 10px; border-radius: 4px;" +
+                 "box-shadow: 4px 4px 8px 4px rgba(0,0,0,0.5);" +
+                 "z-index: 9999; white-space: nowrap;",
+        "bottom" => $"position: absolute; top: 100%; left: 50%; transform: translateX(-50%);" +
+                    $"background-color: {Color}; color: #fff; font-size:13px; font-weight:500;" +
+                    "padding: 6px 10px; border-radius: 4px;" +
+                    "box-shadow: 4px 4px 8px 4px rgba(0,0,0,0.5);" +
+                    "z-index: 9999; white-space: nowrap;",
+        "left" => $"position: absolute; top: 50%; right: 100%; transform: translateY(-50%);" +
+                  $"background-color: {Color}; color: #fff; font-size:13px; font-weight:500;" +
+                  "padding: 6px 10px; border-radius: 4px;" +
+                  "box-shadow: 4px 4px 8px 4px rgba(0,0,0,0.5);" +
+                  "z-index: 9999; white-space: nowrap;",
+        "right" => $"position: absolute; top: 50%; left: 100%; transform: translateY(-50%);" +
+                   $"background-color: {Color}; color: #fff; font-size:13px; font-weight:500;" +
+                   "padding: 6px 10px; border-radius: 4px;" +
+                   "box-shadow: 4px 4px 8px 4px rgba(0,0,0,0.5);" +
+                   "z-index: 9999; white-space: nowrap;",
+        _ => ""
+    };
+
+    private string ArrowStyle => Placement switch
+    {
+        "top" => $"position: absolute; top: 100%; left: 50%; transform: translateX(-50%);" +
+                 "width: 0; height: 0;" +
+                 "border-left: 6px solid transparent;" +
+                 "border-right: 6px solid transparent;" +
+                 $"border-top: 6px solid {Color};",
+        "bottom" => $"position: absolute; bottom: 100%; left: 50%; transform: translateX(-50%);" +
+                    "width: 0; height: 0;" +
+                    "border-left: 6px solid transparent;" +
+                    "border-right: 6px solid transparent;" +
+                    $"border-bottom: 6px solid {Color};",
+        "left" => $"position: absolute; left: 100%; top: 50%; transform: translateY(-50%);" +
+                  "width: 0; height: 0;" +
+                  "border-top: 6px solid transparent;" +
+                  "border-bottom: 6px solid transparent;" +
+                  $"border-left: 6px solid {Color};",
+        "right" => $"position: absolute; right: 100%; top: 50%; transform: translateY(-50%);" +
+                   "width: 0; height: 0;" +
+                   "border-top: 6px solid transparent;" +
+                   "border-bottom: 6px solid transparent;" +
+                   $"border-right: 6px solid {Color};",
+        _ => ""
+    };
+}

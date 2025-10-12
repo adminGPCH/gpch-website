@@ -1,0 +1,50 @@
+﻿@using GpchFrontend.Components
+@inject NavigationManager Navigation
+
+<div class="theme-flower" style="position: relative; width:@($"{Size}px"); height:@($"{Size}px");">
+    <svg viewBox="0 0 220 220" width="@Size" height="@Size">
+        @foreach (var petalo in Petalos)
+        {
+            <Petalo Id="@petalo.Id"
+                    Color="@petalo.Color"
+                    Rotation="@petalo.Rotation"
+                    IsActive="@(petalo.Id == ActivePetal || petalo.Id == HoveredPetal)"
+                    OnHover="Hover"
+                    OnClick="Seleccionar" />
+        }
+    </svg>
+</div>
+
+@code {
+    [Parameter] public int Size { get; set; } = 300;
+
+    private string? ActivePetal;
+    private string? HoveredPetal;
+
+    private void Hover(string? id) => HoveredPetal = id;
+
+    private void Seleccionar(string id)
+    {
+        if (ActivePetal == id)
+        {
+            ActivePetal = null;
+            Navigation.NavigateTo("/");
+        }
+        else
+        {
+            ActivePetal = id;
+            Navigation.NavigateTo($"/{id}");
+        }
+    }
+
+    public record PetaloData(string Id, string Color, int Rotation);
+
+    private List<PetaloData> Petalos = new()
+    {
+        new PetaloData("emocion", "#ec407a", -90),
+        new PetaloData("acompanamiento", "#880e4f", -45),
+        new PetaloData("vital", "#e53935", 0),
+        new PetaloData("revision", "#ffb300", 45),
+        new PetaloData("legado", "#689f38", 90)
+    };
+}
