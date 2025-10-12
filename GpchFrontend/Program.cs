@@ -8,9 +8,13 @@ builder.RootComponents.Add<HeadOutlet>("head::after");
 
 builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri(builder.HostEnvironment.BaseAddress) });
 
+var apiBaseUrl = builder.HostEnvironment.IsDevelopment()
+    ? "http://localhost:7071/api/"
+    : "https://gpch-web.azurewebsites.net/api/";
+
 builder.Services.AddScoped(sp => new HttpClient
 {
-    BaseAddress = new Uri("http://localhost:7071/api/")
+    BaseAddress = new Uri(apiBaseUrl)
 });
 
 
