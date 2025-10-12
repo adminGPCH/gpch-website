@@ -1,6 +1,0 @@
-@PROUX_ERP.Server_HostAddress = http://localhost:5038
-
-GET {{PROUX_ERP.Server_HostAddress}}/weatherforecast/
-Accept: application/json
-
-###

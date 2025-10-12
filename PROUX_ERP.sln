@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PROUX_ERP.Shared", "PROUX_E
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PROUX_ERP.Client", "PROUX_ERP.Client\PROUX_ERP.Client.csproj", "{F7F1216E-F208-C1C0-5C90-78697B3BFF8A}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GpchMailApi", "GpchMailApi\GpchMailApi.csproj", "{3C58D414-1E39-458F-BF54-8AA62A3977B5}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -55,6 +57,18 @@ Global
 		{F7F1216E-F208-C1C0-5C90-78697B3BFF8A}.Release|x64.Build.0 = Release|Any CPU
 		{F7F1216E-F208-C1C0-5C90-78697B3BFF8A}.Release|x86.ActiveCfg = Release|Any CPU
 		{F7F1216E-F208-C1C0-5C90-78697B3BFF8A}.Release|x86.Build.0 = Release|Any CPU
+		{3C58D414-1E39-458F-BF54-8AA62A3977B5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3C58D414-1E39-458F-BF54-8AA62A3977B5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3C58D414-1E39-458F-BF54-8AA62A3977B5}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{3C58D414-1E39-458F-BF54-8AA62A3977B5}.Debug|x64.Build.0 = Debug|Any CPU
+		{3C58D414-1E39-458F-BF54-8AA62A3977B5}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{3C58D414-1E39-458F-BF54-8AA62A3977B5}.Debug|x86.Build.0 = Debug|Any CPU
+		{3C58D414-1E39-458F-BF54-8AA62A3977B5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3C58D414-1E39-458F-BF54-8AA62A3977B5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3C58D414-1E39-458F-BF54-8AA62A3977B5}.Release|x64.ActiveCfg = Release|Any CPU
+		{3C58D414-1E39-458F-BF54-8AA62A3977B5}.Release|x64.Build.0 = Release|Any CPU
+		{3C58D414-1E39-458F-BF54-8AA62A3977B5}.Release|x86.ActiveCfg = Release|Any CPU
+		{3C58D414-1E39-458F-BF54-8AA62A3977B5}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
