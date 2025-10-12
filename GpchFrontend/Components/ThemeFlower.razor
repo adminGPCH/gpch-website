@@ -6,12 +6,17 @@
     <svg viewBox="0 0 220 220" width="@Size" height="@Size">
         @foreach (var petalo in Petalos)
         {
+            //<GPCHTooltip Text="@petalo.Nombre" Placement="top">
             <Petalo Id="@petalo.Id"
                     Color="@petalo.Color"
                     Rotation="@petalo.Rotation"
+                    Tooltip="@petalo.Nombre"
                     IsActive="@(petalo.Id == ActivePetal || petalo.Id == HoveredPetal)"
                     OnHover="Hover"
-                    OnClick="Seleccionar" />
+                    OnClick="Navegar" />
+
+           //</GPCHTooltip>
+
         }
     </svg>
 </div>
@@ -24,30 +29,33 @@
     private string? ActivePetal;
     private string? HoveredPetal;
 
-    private void Hover(string? id) => HoveredPetal = id;
-
-    private void Seleccionar(string id)
+    private void Hover(string? id)
     {
-        if (ActivePetal == id && Theme.TemaActual == id)
-        {
-            Theme.CambiarTema(TemaPorDefecto);
-            ActivePetal = null;
-        }
-        else
+        HoveredPetal = id;
+
+        if (!string.IsNullOrEmpty(id))
         {
             Theme.CambiarTema(id);
             ActivePetal = id;
         }
     }
 
-    public record PetaloData(string Id, string Color, int Rotation);
+    private void Navegar(string id)
+    {
+        var petalo = Petalos.FirstOrDefault(p => p.Id == id);
+        if (petalo is null) return;
+
+        Navigation.NavigateTo(petalo.Ruta);
+    }
+
+    public record PetaloData(string Id, string Color, int Rotation, string Ruta, string Nombre);
 
     private List<PetaloData> Petalos = new()
     {
-        new PetaloData("emocion", "#ec407a", -90),
-        new PetaloData("acompanamiento", "#880e4f", -45),
-        new PetaloData("vital", "#e53935", 0),
-        new PetaloData("revision", "#ffb300", 45),
-        new PetaloData("legado", "#689f38", 90)
+        new PetaloData("emocion", "#ec407a", -90, "/", "Inicio"),
+        new PetaloData("acompanamiento", "#880e4f", -45, "/identidad", "Nuestra identidad"),
+        new PetaloData("vital", "#e53935", 0, "/productos", "Productos"),
+        new PetaloData("revision", "#ffb300", 45, "/contacto", "Contacto"),
+        new PetaloData("legado", "#689f38", 90, "/contacto", "Contacto")
     };
 }

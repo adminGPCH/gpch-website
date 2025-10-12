@@ -8,7 +8,10 @@
           class="petalo"
           role="button"
           aria-label="Seleccionar tema @Id"
-          @onclick="() => OnClick.InvokeAsync(Id)" />
+          @onclick="HandleClick"
+          style="pointer-events: all;">
+        <title>@Tooltip</title>
+    </path>
 </g>
 
 @code {
@@ -18,6 +21,9 @@
     [Parameter] public bool IsActive { get; set; }
     [Parameter] public EventCallback<string?> OnHover { get; set; }
     [Parameter] public EventCallback<string> OnClick { get; set; }
+    [Parameter] public string Tooltip { get; set; } = string.Empty;
 
     private string Transform => $"translate(110,110) rotate({Rotation}) scale({(IsActive ? 1.1 : 1.0)}) translate(-110,-110)";
+
+    private async Task HandleClick() => await OnClick.InvokeAsync(Id);
 }
