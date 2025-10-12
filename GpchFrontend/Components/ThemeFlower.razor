@@ -17,6 +17,8 @@
 </div>
 
 @code {
+    private const string TemaPorDefecto = "azul";
+
     [Parameter] public int Size { get; set; } = 300;
 
     private string? ActivePetal;
@@ -26,8 +28,16 @@
 
     private void Seleccionar(string id)
     {
-        Theme.CambiarTema(id); 
-        ActivePetal = id;
+        if (ActivePetal == id && Theme.TemaActual == id)
+        {
+            Theme.CambiarTema(TemaPorDefecto);
+            ActivePetal = null;
+        }
+        else
+        {
+            Theme.CambiarTema(id);
+            ActivePetal = id;
+        }
     }
 
     public record PetaloData(string Id, string Color, int Rotation);

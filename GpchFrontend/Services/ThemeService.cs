@@ -2,7 +2,7 @@
 {
     public class ThemeService
     {
-        public string TemaActual { get; private set; } = "vital";
+        public string TemaActual { get; private set; } = "azul";
 
         public event Action? OnThemeChanged;
 
