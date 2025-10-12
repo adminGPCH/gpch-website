@@ -1,8 +1,9 @@
-﻿@using Microsoft.AspNetCore.Components
+﻿@inject GpchFrontend.Services.ThemeService Theme
+@using GpchFrontend.Services
 
 <link href="css/appbar.css" rel="stylesheet" />
 
-<header class="gpch-appbar">
+<header class="gpch-appbar" style="background-color:@ColorTema">
     <div class="appbar-content">
         <img src="images/logo_gpch-solo-t.png" alt="GPCH Logo" class="appbar-logo" />
         <nav class="appbar-nav">
@@ -13,3 +14,18 @@
     </div>
 </header>
 
+@code {
+    private string ColorTema = ThemePalette.GetColor("vital");
+
+    protected override void OnInitialized()
+    {
+        Theme.OnThemeChanged += ActualizarColor;
+        ActualizarColor();
+    }
+
+    private void ActualizarColor()
+    {
+        ColorTema = ThemePalette.GetColor(Theme.TemaActual);
+        StateHasChanged();
+    }
+}

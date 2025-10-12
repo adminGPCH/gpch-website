@@ -1,15 +1,36 @@
 ﻿@inherits LayoutComponentBase
+@inject GpchFrontend.Services.ThemeService Theme
+@using GpchFrontend.Services
 @using GpchFrontend.Components
 
 <div class="page">
     <main>
         <AppBar />
-
         <article class="content px-4">
             @Body
         </article>
-
         <Footer />
-
     </main>
 </div>
+
+
+@code {
+    private string ColorTema = ThemePalette.GetColor("vital");
+    private int FontSizeBase = ThemePalette.GetFontSizeBase("vital");
+    private int SpacingBase = ThemePalette.GetSpacingBase("vital");
+
+    protected override void OnInitialized()
+    {
+        Theme.OnThemeChanged += ActualizarEstilos;
+        ActualizarEstilos();
+    }
+
+    private void ActualizarEstilos()
+    {
+        var tema = Theme.TemaActual;
+        ColorTema = ThemePalette.GetColor(tema);
+        FontSizeBase = ThemePalette.GetFontSizeBase(tema);
+        SpacingBase = ThemePalette.GetSpacingBase(tema);
+        StateHasChanged();
+    }
+}

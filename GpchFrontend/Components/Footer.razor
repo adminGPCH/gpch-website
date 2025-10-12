@@ -1,8 +1,9 @@
-﻿@using Microsoft.AspNetCore.Components
+﻿@inject GpchFrontend.Services.ThemeService Theme
+@using GpchFrontend.Services
 
 <link href="css/footer.css" rel="stylesheet" />
 
-<footer class="gpch-footer">
+<footer class="gpch-footer" style="background-color:@ColorTema">
     <div class="footer-content">
         <p>© @DateTime.Now.Year Goerlich Pharma Chile Ltda. Propiedad intelectual protegida.</p>
         <nav>
@@ -12,3 +13,19 @@
         </nav>
     </div>
 </footer>
+
+@code {
+    private string ColorTema = ThemePalette.GetColor("vital");
+
+    protected override void OnInitialized()
+    {
+        Theme.OnThemeChanged += ActualizarColor;
+        ActualizarColor();
+    }
+
+    private void ActualizarColor()
+    {
+        ColorTema = ThemePalette.GetColor(Theme.TemaActual);
+        StateHasChanged();
+    }
+}

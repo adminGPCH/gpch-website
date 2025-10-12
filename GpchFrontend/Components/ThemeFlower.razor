@@ -1,5 +1,6 @@
 ﻿@using GpchFrontend.Components
 @inject NavigationManager Navigation
+@inject GpchFrontend.Services.ThemeService Theme
 
 <div class="theme-flower" style="position: relative; width:@($"{Size}px"); height:@($"{Size}px");">
     <svg viewBox="0 0 220 220" width="@Size" height="@Size">
@@ -25,16 +26,8 @@
 
     private void Seleccionar(string id)
     {
-        if (ActivePetal == id)
-        {
-            ActivePetal = null;
-            Navigation.NavigateTo("/");
-        }
-        else
-        {
-            ActivePetal = id;
-            Navigation.NavigateTo($"/{id}");
-        }
+        Theme.CambiarTema(id); 
+        ActivePetal = id;
     }
 
     public record PetaloData(string Id, string Color, int Rotation);

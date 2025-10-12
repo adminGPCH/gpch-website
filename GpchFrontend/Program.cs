@@ -12,6 +12,8 @@ var apiBaseUrl = builder.HostEnvironment.IsDevelopment()
     ? "http://localhost:7071/api/"
     : "https://gpch-web.azurewebsites.net/api/";
 
+builder.Services.AddSingleton<GpchFrontend.Services.ThemeService>();
+
 builder.Services.AddScoped(sp => new HttpClient
 {
     BaseAddress = new Uri(apiBaseUrl)
