@@ -39,7 +39,9 @@
         </div>
 
         <div class="formulario-button">
-            <button type="button" @onclick="Enviar">Enviar</button>
+            <button type="button" @onclick="Enviar" disabled="@isSending" class="btn btn-primary">
+                @(isSending ? "Enviando..." : "Enviar")
+            </button>
 
             @if (!string.IsNullOrEmpty(MensajeError))
             {
@@ -64,9 +66,13 @@
     private string? MensajeError;
     private string? MensajeExito;
     private int CaracteresMensaje = 0;
+    private bool isSending = false;
 
     private async Task Enviar()
     {
+        isSending = true;
+        StateHasChanged();
+
         var nombre = await JS.InvokeAsync<string>("getValue", nombreRef);
         var email = await JS.InvokeAsync<string>("getValue", emailRef);
         var mensaje = await JS.InvokeAsync<string>("getValue", mensajeRef);
@@ -77,6 +83,7 @@
         {
             MensajeError = "Por favor complete todos los campos antes de enviar.";
             MensajeExito = null;
+            isSending = false;
 
             _ = Task.Run(async () =>
             {
@@ -92,6 +99,7 @@
         {
             MensajeError = "El correo electrónico no tiene un formato válido.";
             MensajeExito = null;
+            isSending = false;
 
             _ = Task.Run(async () =>
             {
@@ -120,6 +128,7 @@
         await JS.InvokeVoidAsync("setValue", mensajeRef, "");
 
         CaracteresMensaje = 0;
+        isSending = false;
 
         _ = Task.Run(async () =>
         {
