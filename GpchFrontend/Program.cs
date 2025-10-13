@@ -16,7 +16,7 @@ builder.Services.AddSingleton<GpchFrontend.Services.ThemeService>();
 
 builder.Services.AddScoped(sp => new HttpClient
 {
-    BaseAddress = new Uri("https://gpch-web.azurewebsites.net/api/")
+    BaseAddress = new Uri(apiBaseUrl)
 });
 
 await builder.Build().RunAsync();
