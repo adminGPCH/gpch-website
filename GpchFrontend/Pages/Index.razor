@@ -23,8 +23,13 @@
     {
         try
         {
+            Console.WriteLine($"Enviando a: mail/send");
+            Console.WriteLine($"Datos: {System.Text.Json.JsonSerializer.Serialize(datos)}");
+
             var response = await Http.PostAsJsonAsync("mail/send", datos);
             var resultado = await response.Content.ReadAsStringAsync();
+
+            Console.WriteLine($"Estado: {response.StatusCode}");
             Console.WriteLine($"Respuesta del servidor: {resultado}");
         }
         catch (Exception ex)
@@ -32,4 +37,5 @@
             Console.WriteLine($"Error al enviar: {ex.Message}");
         }
     }
+
 }

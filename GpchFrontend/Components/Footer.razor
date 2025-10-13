@@ -3,22 +3,31 @@
 
 <footer class="gpch-footer" style="background-color:@ColorTema">
     <div class="footer-content">
-        <p>© @DateTime.Now.Year Goerlich Pharma Chile Ltda. Propiedad intelectual protegida.</p>
+        <p style="color:@ColorContraste">© @DateTime.Now.Year Goerlich Pharma Chile Ltda. Propiedad intelectual protegida.</p>
     </div>
 </footer>
 
 @code {
-    private string ColorTema = ThemePalette.GetColor("vital");
+    private string ColorTema = ThemePalette.GetColor("rojo");
+    private string ColorContraste = "#000000";
 
     protected override void OnInitialized()
     {
         Theme.OnThemeChanged += ActualizarColor;
         ActualizarColor();
+        Theme.OnThemeChanged += ActualizarContraste;
+        ActualizarContraste();
     }
 
     private void ActualizarColor()
     {
         ColorTema = ThemePalette.GetColor(Theme.TemaActual);
+        StateHasChanged();
+    }
+    private void ActualizarContraste()
+    {
+        var tema = Theme.TemaActual;
+        ColorContraste = ThemePalette.GetContraste(tema);
         StateHasChanged();
     }
 }

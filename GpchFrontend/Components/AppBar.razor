@@ -8,24 +8,33 @@
         </NavLink>
 
         <nav class="appbar-nav">
-            <a href="/">Inicio</a>
-            <a href="/contacto">Contacto</a>
+            <a style="color:@ColorContraste" href="/">Inicio</a>
+            <a style="color:@ColorContraste" href="/contacto">Contacto</a>
         </nav>
     </div>
 </header>
 
 @code {
-    private string ColorTema = ThemePalette.GetColor("vital");
+    private string ColorTema = ThemePalette.GetColor("rojo");
+    private string ColorContraste = "#000000";
 
     protected override void OnInitialized()
     {
         Theme.OnThemeChanged += ActualizarColor;
         ActualizarColor();
+        Theme.OnThemeChanged += ActualizarContraste;
+        ActualizarContraste();
     }
 
     private void ActualizarColor()
     {
         ColorTema = ThemePalette.GetColor(Theme.TemaActual);
+        StateHasChanged();
+    }
+    private void ActualizarContraste()
+    {
+        var tema = Theme.TemaActual;
+        ColorContraste = ThemePalette.GetContraste(tema);
         StateHasChanged();
     }
 }

@@ -14,20 +14,23 @@
     else
     {
         <main>
-            <AppBar />
-            <article class="content px-4">
-                @Body
-            </article>
-            <Footer />
+            <div class="gpch-layout" style="--gpch-tema-color:@FondoTema; --gpch-tema-textura:@TexturaTema;">
+                <AppBar />
+                <div class="gpch-body">
+                    @Body
+                </div>
+                <Footer />
+            </div>
         </main>
     }
 </div>
 
 @code {
-    private string ColorTema = ThemePalette.GetColor("vital");
-    private int FontSizeBase = ThemePalette.GetFontSizeBase("vital");
-    private int SpacingBase = ThemePalette.GetSpacingBase("vital");
+    private int FontSizeBase = ThemePalette.GetFontSizeBase("rojo");
+    private int SpacingBase = ThemePalette.GetSpacingBase("rojo");
     private bool IsLoading = false;
+    private string FondoTema = ThemePalette.GetColor("rojo");
+    private string TexturaTema = "none";
 
     protected override void OnInitialized()
     {
@@ -51,9 +54,10 @@
     private void ActualizarEstilos()
     {
         var tema = Theme.TemaActual;
-        ColorTema = ThemePalette.GetColor(tema);
         FontSizeBase = ThemePalette.GetFontSizeBase(tema);
         SpacingBase = ThemePalette.GetSpacingBase(tema);
+        FondoTema = ThemePalette.GetColor(tema);
+        TexturaTema = ThemePalette.GetBackgroundTexture(tema);
         StateHasChanged();
     }
 }

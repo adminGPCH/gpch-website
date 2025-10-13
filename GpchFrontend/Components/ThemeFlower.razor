@@ -1,33 +1,48 @@
 ﻿@using GpchFrontend.Components
+@using GpchFrontend.Services
 @inject NavigationManager Navigation
 @inject GpchFrontend.Services.ThemeService Theme
 
-<div class="theme-flower" style="position: relative; width:@($"{Size}px"); height:@($"{Size}px");">
-    <svg viewBox="0 0 220 220" width="@Size" height="@Size">
-        @foreach (var petalo in Petalos)
-        {
-            //<GPCHTooltip Text="@petalo.Nombre" Placement="top">
-            <Petalo Id="@petalo.Id"
-                    Color="@petalo.Color"
-                    Rotation="@petalo.Rotation"
-                    Tooltip="@petalo.Nombre"
-                    IsActive="@(petalo.Id == ActivePetal || petalo.Id == HoveredPetal)"
-                    OnHover="Hover"
-                    OnClick="Navegar" />
+<div class="flower-container">
+    <div class="theme-flower" style="position: relative; width:@($"{Size}px");">
+        <svg viewBox="@GetViewBox()" width="@Size">
+            @foreach (var petalo in Petalos)
+            {
+                <Petalo Id="@petalo.Id"
+                        Color="@petalo.Color"
+                        Rotation="@petalo.Rotation"
+                        Tooltip="@petalo.Nombre"
+                        IsActive="@(petalo.Id == ActivePetal || petalo.Id == HoveredPetal)"
+                        OnHover="Hover"
+                        OnClick="Navegar" />
+            }
+        </svg>
+    </div>
 
-           //</GPCHTooltip>
-
-        }
-    </svg>
+    @if (!string.IsNullOrEmpty(TextoHover))
+    {
+        <div class="info-tema" style="background-color:@FondoTema; color:@ContrasteTema;">
+            <p style="margin: 0;">@TextoHover</p>
+        </div>
+    }
 </div>
 
 @code {
     private const string TemaPorDefecto = "azul";
+    private string? TextoHover;
+    private string FondoTema = "#ffffff";
+    private string ContrasteTema = "#000000";
 
     [Parameter] public int Size { get; set; } = 300;
 
     private string? ActivePetal;
     private string? HoveredPetal;
+
+    protected override void OnInitialized()
+    {
+        Theme.OnThemeChanged += ActualizarEstilos;
+        ActualizarEstilos();
+    }
 
     private void Hover(string? id)
     {
@@ -35,8 +50,14 @@
 
         if (!string.IsNullOrEmpty(id))
         {
+            var petalo = Petalos.FirstOrDefault(p => p.Id == id);
+            TextoHover = petalo?.Nombre ?? "";
             Theme.CambiarTema(id);
             ActivePetal = id;
+        }
+        else
+        {
+            TextoHover = null;
         }
     }
 
@@ -48,14 +69,36 @@
         Navigation.NavigateTo(petalo.Ruta);
     }
 
+    private void ActualizarEstilos()
+    {
+        var tema = Theme.TemaActual;
+        FondoTema = ThemePalette.GetColor(tema);
+        ContrasteTema = ThemePalette.GetContraste(tema);
+        StateHasChanged();
+    }
+
     public record PetaloData(string Id, string Color, int Rotation, string Ruta, string Nombre);
 
     private List<PetaloData> Petalos = new()
     {
-        new PetaloData("emocion", "#ec407a", -90, "/", "Inicio"),
-        new PetaloData("acompanamiento", "#880e4f", -45, "/identidad", "Nuestra identidad"),
-        new PetaloData("vital", "#e53935", 0, "/productos", "Productos"),
-        new PetaloData("revision", "#ffb300", 45, "/contacto", "Contacto"),
-        new PetaloData("legado", "#689f38", 90, "/contacto", "Contacto")
+        new PetaloData("rosado", "#ec407a", -90, "/", "Inicio"),
+        new PetaloData("burdeos", "#880e4f", -45, "/identidad", "Nuestra identidad"),
+        new PetaloData("rojo", "#e53935", 0, "/productos", "Productos"),
+        new PetaloData("amarillo", "#ffb300", 45, "/contacto", "Contacto"),
+        new PetaloData("verde", "#689f38", 90, "/contacto", "Contacto")
     };
+
+    private string GetViewBox()
+    {
+        var lateralIzqX = 0;
+        var lateralDerX = 220;
+
+        var puntoSuperiorY = 0;
+        var puntoInferiorY = 160;
+
+        var ancho = lateralDerX - lateralIzqX; // 220
+        var alto = puntoInferiorY - puntoSuperiorY; // 150
+
+        return $"0 0 {ancho} {alto}";
+    }
 }
