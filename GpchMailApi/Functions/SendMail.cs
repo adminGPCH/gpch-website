@@ -14,7 +14,6 @@ namespace GpchMailApi.Functions
     {
         private readonly ILogger<SendMail> _logger = logger;
 
-        // ✅ Reutilización recomendada por CA1869
         private static readonly JsonSerializerOptions _jsonOptions = new()
         {
             PropertyNameCaseInsensitive = true
@@ -45,7 +44,7 @@ namespace GpchMailApi.Functions
                 return error;
             }
 
-            _logger.LogInformation("Enviando correo a {Email}", request.Email!);
+            _logger.LogInformation("Procesando mensaje desde {Email}", request.Email);
 
             try
             {
@@ -63,7 +62,7 @@ namespace GpchMailApi.Functions
                     Body = new ItemBody
                     {
                         ContentType = BodyType.Text,
-                        Content = request.Message
+                        Content = $"Correo desde GPCH.cl\n\nNombre: {request.Name}\nEmail: {request.Email}\n\nMensaje:\n{request.Message}"
                     },
                     ToRecipients =
                     [
@@ -71,7 +70,7 @@ namespace GpchMailApi.Functions
                         {
                             EmailAddress = new EmailAddress
                             {
-                                Address = request.Email
+                                Address = senderEmail
                             }
                         }
                     ]
