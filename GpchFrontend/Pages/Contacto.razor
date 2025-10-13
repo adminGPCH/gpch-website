@@ -4,7 +4,7 @@
 <link href="css/site.css" rel="stylesheet" />
 
 <div class="contacto-wrapper">
-    <FormularioContacto />
+    <FormularioContacto OnEnviar="EnviarCorreo" />
 
     <!-- Tarjeta institucional -->
     <div class="bloque-texto">
@@ -19,4 +19,30 @@
             </a>
         </p>
     </div>
-</div>
+</div
+
+@code {
+    [Inject] public HttpClient? Http { get; set; }
+
+private async Task EnviarCorreo(FormularioContacto.MailRequest datos)
+{
+    if (Http is null)
+    {
+        Console.WriteLine("HttpClient no fue inyectado correctamente.");
+        return;
+    }
+
+    try
+    {
+        var response = await Http.PostAsJsonAsync("mail/send", datos);
+        var resultado = await response.Content.ReadAsStringAsync();
+        Console.WriteLine($"Estado: {response.StatusCode}");
+        Console.WriteLine($"Respuesta del servidor: {resultado}");
+    }
+    catch (Exception ex)
+    {
+        Console.WriteLine($"Error al enviar: {ex.Message}");
+    }
+}
+
+}>
