@@ -1,27 +1,50 @@
 ﻿@inherits LayoutComponentBase
+@inject NavigationManager Navigation
 @inject GpchFrontend.Services.ThemeService Theme
 @using GpchFrontend.Services
 @using GpchFrontend.Components
 
 <div class="page">
-    <main>
-        <AppBar />
-        <article class="content px-4">
-            @Body
-        </article>
-        <Footer />
-    </main>
+    @if (IsLoading)
+    {
+        <div class="gpch-transicion-wrapper">
+            <FlorSVG Size="120" />
+        </div>
+    }
+    else
+    {
+        <main>
+            <AppBar />
+            <article class="content px-4">
+                @Body
+            </article>
+            <Footer />
+        </main>
+    }
 </div>
-
 
 @code {
     private string ColorTema = ThemePalette.GetColor("vital");
     private int FontSizeBase = ThemePalette.GetFontSizeBase("vital");
     private int SpacingBase = ThemePalette.GetSpacingBase("vital");
+    private bool IsLoading = false;
 
     protected override void OnInitialized()
     {
         Theme.OnThemeChanged += ActualizarEstilos;
+        Navigation.LocationChanged += (_, __) =>
+        {
+            IsLoading = true;
+            StateHasChanged();
+
+            _ = Task.Run(async () =>
+            {
+                await Task.Delay(600); // duración de la transición
+                IsLoading = false;
+                await InvokeAsync(StateHasChanged);
+            });
+        };
+
         ActualizarEstilos();
     }
 

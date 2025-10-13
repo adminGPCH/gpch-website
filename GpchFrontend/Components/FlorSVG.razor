@@ -1,0 +1,23 @@
+﻿@namespace GpchFrontend.Components
+
+<svg viewBox="0 0 220 220" width="@Size" height="@Size" xmlns="http://www.w3.org/2000/svg">
+    <g transform="translate(110,110) rotate(-90) translate(-110,-110)">
+        <path d="M110,110 Q60,70 110,10 Q160,70 110,110 Z" fill="#ec407a" />
+    </g>
+    <g transform="translate(110,110) rotate(-45) translate(-110,-110)">
+        <path d="M110,110 Q60,70 110,10 Q160,70 110,110 Z" fill="#880e4f" />
+    </g>
+    <g transform="translate(110,110) rotate(0) translate(-110,-110)">
+        <path d="M110,110 Q60,70 110,10 Q160,70 110,110 Z" fill="#e53935" />
+    </g>
+    <g transform="translate(110,110) rotate(45) translate(-110,-110)">
+        <path d="M110,110 Q60,70 110,10 Q160,70 110,110 Z" fill="#ffb300" />
+    </g>
+    <g transform="translate(110,110) rotate(90) translate(-110,-110)">
+        <path d="M110,110 Q60,70 110,10 Q160,70 110,110 Z" fill="#689f38" />
+    </g>
+</svg>
+
+@code {
+    [Parameter] public int Size { get; set; } = 120;
+}

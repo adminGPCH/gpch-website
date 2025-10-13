@@ -43,3 +43,46 @@
         .bloque-texto a:hover {
             text-decoration: underline;
         }
+
+.gpch-loader-flor {
+    display: block;
+    margin: 80px auto 20px auto;
+    animation: flor-rotar 4s linear infinite;
+}
+
+@keyframes flor-rotar {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.gpch-transicion-wrapper {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: white; /* o usa ThemePalette.GetColor si quieres fondo temático */
+    z-index: 9999;
+}
+
+    .gpch-transicion-wrapper svg {
+        animation: flor-rotar 0.7s linear infinite;
+    }
+
+@keyframes flor-rotar {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+}
