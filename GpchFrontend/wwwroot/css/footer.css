@@ -5,6 +5,7 @@
     font-size: 0.9rem;
     text-align: center;
     margin-top: 4rem;
+    box-shadow: 0 -8px 8px rgba(0,0,0,0.2);
 }
 
 .footer-content {
