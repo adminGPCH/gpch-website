@@ -1,5 +1,6 @@
 ﻿@inject GpchFrontend.Services.ThemeService Theme
 @using GpchFrontend.Services
+@inject NavigationManager Nav
 
 <header class="gpch-appbar" style="background-color:@ColorTema">
     <div class="appbar-content">
@@ -24,6 +25,13 @@
         ActualizarColor();
         Theme.OnThemeChanged += ActualizarContraste;
         ActualizarContraste();
+        Nav.LocationChanged += (_, args) =>
+        {
+            if (args.Location.EndsWith("/"))
+            {
+                Theme.CambiarTema("azul");
+            }
+        };
     }
 
     private void ActualizarColor()

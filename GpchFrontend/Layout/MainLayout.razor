@@ -3,6 +3,8 @@
 @inject GpchFrontend.Services.ThemeService Theme
 @using GpchFrontend.Services
 @using GpchFrontend.Components
+@inject NavigationManager Nav
+@inject ThemeService Theme
 
 <div class="page">
     @if (IsLoading)
@@ -14,7 +16,7 @@
     else
     {
         <main>
-            <div class="gpch-layout" style="--gpch-tema-color:@FondoTema; --gpch-tema-textura:@TexturaTema;">
+            <div class="gpch-layout" style="--gpch-tema-color:@FondoTema; --gpch-tema-bkpimage:@BkpImageTema;">
                 <AppBar />
                 <div class="gpch-body">
                     @Body
@@ -30,7 +32,7 @@
     private int SpacingBase = ThemePalette.GetSpacingBase("rojo");
     private bool IsLoading = false;
     private string FondoTema = ThemePalette.GetColor("rojo");
-    private string TexturaTema = "none";
+    private string BkpImageTema = "none";
 
     protected override void OnInitialized()
     {
@@ -57,7 +59,7 @@
         FontSizeBase = ThemePalette.GetFontSizeBase(tema);
         SpacingBase = ThemePalette.GetSpacingBase(tema);
         FondoTema = ThemePalette.GetColor(tema);
-        TexturaTema = ThemePalette.GetBackgroundTexture(tema);
+        BkpImageTema = ThemePalette.GetBackgroundImage(tema);
         StateHasChanged();
     }
 }

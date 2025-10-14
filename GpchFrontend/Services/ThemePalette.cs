@@ -46,32 +46,16 @@
             _ => 8
         };
 
-        public static string GetBackgroundTexture(string tema)
+        public static string GetBackgroundImage(string tema) => tema switch
         {
-            var color = GetColor(tema).Replace("#", "%23");
-
-            var svg = $@"
-                <svg xmlns='http://www.w3.org/2000/svg' width='6' height='6'>
-                  <line x1='0' y1='0' x2='6' y2='0' stroke='{color}' stroke-width='0.4' opacity='0.08'/>
-                  <line x1='0' y1='1' x2='6' y2='1' stroke='{color}' stroke-width='0.4' opacity='0.04'/>
-                  <line x1='0' y1='2' x2='6' y2='2' stroke='{color}' stroke-width='0.4' opacity='0.02'/>
-                  <line x1='0' y1='3' x2='6' y2='3' stroke='{color}' stroke-width='0.4' opacity='0.04'/>
-                  <line x1='0' y1='4' x2='6' y2='4' stroke='{color}' stroke-width='0.4' opacity='0.08'/>
-                  <line x1='0' y1='5' x2='6' y2='5' stroke='{color}' stroke-width='0.4' opacity='0.04'/>
-                  <line x1='0' y1='6' x2='6' y2='6' stroke='{color}' stroke-width='0.4' opacity='0.02'/>
-                  <line x1='0' y1='0' x2='0' y2='6' stroke='{color}' stroke-width='0.4' opacity='0.08'/>
-                  <line x1='1' y1='0' x2='1' y2='6' stroke='{color}' stroke-width='0.4' opacity='0.04'/>
-                  <line x1='2' y1='0' x2='2' y2='6' stroke='{color}' stroke-width='0.4' opacity='0.02'/>
-                  <line x1='3' y1='0' x2='3' y2='6' stroke='{color}' stroke-width='0.4' opacity='0.04'/>
-                  <line x1='4' y1='0' x2='4' y2='6' stroke='{color}' stroke-width='0.4' opacity='0.08'/>
-                  <line x1='5' y1='0' x2='5' y2='6' stroke='{color}' stroke-width='0.4' opacity='0.04'/>
-                  <line x1='6' y1='0' x2='6' y2='6' stroke='{color}' stroke-width='0.4' opacity='0.02'/>
-                </svg>";
-            var encoded = Uri.EscapeDataString(svg);
-            return $"url(\"data:image/svg+xml,{encoded}\")";
-        }
-
-
+            "rosado" => "url('/images/fondos/fondo-rosado.webp')",
+            "burdeos" => "url('/images/fondos/fondo-burdeos.webp')",
+            "rojo" => "url('/images/fondos/fondo-rojo.webp')",
+            "amarillo" => "url('/images/fondos/fondo-amarillo.webp')",
+            "verde" => "url('/images/fondos/fondo-verde.webp')",
+            "azul" => "url('/images/fondos/fondo-azul.webp')",
+            _ => "Initial"
+        };
 
     }
 }
