@@ -1,4 +1,6 @@
-﻿namespace GpchFrontend.Services
+﻿using GpchFrontend.Utils;
+
+namespace GpchFrontend.Services
 {
     public static class ThemePalette
     {
@@ -13,16 +15,28 @@
             _ => "#b71c1c"
         };
 
-        public static string GetContraste(string tema) => tema switch
+        public static string GetContraste(string tema)
         {
-            "rosado" => "#000000",
-            "burdeos" => "#ffffff",
-            "rojo" => "#ffffff",
-            "amarillo" => "#000000",
-            "verde" => "#ffffff",
-            "azul" => "#ffffff",
-            _ => "#ffffff"
+            var baseColor = GetColor(tema);
+            return ColorUtils.GetContrastColor(baseColor);
+        }
+
+        public static string GetTitleColor(string tema) => tema switch
+        {
+            "rosado" => "#3E3A36",
+            "burdeos" => "#281414",
+            "rojo" => "#fab069",
+            "amarillo" => "#3B2F00",
+            "verde" => "#0e2b0c",
+            "azul" => "#080933",
+            _ => "#FFFFFF"
         };
+
+        public static string GetTitleContrast(string tema)
+        {
+            var titleColor = GetTitleColor(tema);
+            return ColorUtils.GetContrastColor(titleColor);
+        }
 
         public static int GetFontSizeBase(string tema) => tema switch
         {

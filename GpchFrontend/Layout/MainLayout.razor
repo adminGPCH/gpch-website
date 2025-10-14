@@ -28,8 +28,8 @@
 </div>
 
 @code {
-    private int FontSizeBase = ThemePalette.GetFontSizeBase("rojo");
-    private int SpacingBase = ThemePalette.GetSpacingBase("rojo");
+    private int ThemeFontSizeBase = ThemePalette.GetFontSizeBase("rojo");
+    private int ThemeSpacingBase = ThemePalette.GetSpacingBase("rojo");
     private bool IsLoading = false;
     private string FondoTema = ThemePalette.GetColor("rojo");
     private string BkpImageTema = "none";
@@ -56,8 +56,8 @@
     private void ActualizarEstilos()
     {
         var tema = Theme.TemaActual;
-        FontSizeBase = ThemePalette.GetFontSizeBase(tema);
-        SpacingBase = ThemePalette.GetSpacingBase(tema);
+        ThemeFontSizeBase = ThemePalette.GetFontSizeBase(tema);
+        ThemeSpacingBase = ThemePalette.GetSpacingBase(tema);
         FondoTema = ThemePalette.GetColor(tema);
         BkpImageTema = ThemePalette.GetBackgroundImage(tema);
         StateHasChanged();

@@ -13,7 +13,6 @@
     margin: 0.25rem 0 0.5rem 0;
     font-size: 2rem;
     font-weight: bold;
-    color: #1976d2;
 }
 
 .subtitle {
@@ -83,9 +82,12 @@ svg {
     width: 100%;
     max-width: 720px;
     padding: 2rem;
-    background: #fff;
+    background: rgba(255, 255, 255, 0.2); /* blanco translúcido */
     border-radius: 12px;
     box-shadow: 0 16px 16px rgba(0,0,0,0.3), 0 0 8px rgba(0,0,0,0.4);
+    backdrop-filter: blur(12px); /* difuminado del fondo */
+    -webkit-backdrop-filter: blur(12px); /* soporte Safari */
+    border: 1px solid rgba(255, 255, 255, 0.3); /* borde sutil */
     box-sizing: border-box;
     text-align: center;
 }

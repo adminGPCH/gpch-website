@@ -1,0 +1,1 @@
+﻿window.getDeviceWidth = () => window.innerWidth;
