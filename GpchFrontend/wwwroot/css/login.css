@@ -3,6 +3,7 @@
     margin-bottom: 1rem;
     transition: transform 0.6s ease-in-out;
     cursor: pointer;
+    opacity: 1;
 }
 
     .logo:hover {
@@ -17,12 +18,13 @@
     font-optical-sizing: auto;
     font-weight: 700;
     font-style: initial;
+    opacity: 1;
 }
 
 .subtitle {
     margin-bottom: 2rem;
     font-size: 1rem;
-    color: #666;
+    opacity: 0.5;
 }
 
 .hover-label {
@@ -46,6 +48,7 @@
     gap: 0rem; /* reduce separación entre flor y etiqueta */
     padding-bottom: 0;
     min-height: 280px; /* ajusta según tamaño de ThemeFlower + etiqueta */
+    opacity: 1;
 }
 
 .theme-flower {
