@@ -11,8 +11,12 @@
 
 .brand {
     margin: 0.25rem 0 0.5rem 0;
-    font-size: 2rem;
-    font-weight: bold;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    font-family: "Quicksand", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 700;
+    font-style: initial;
 }
 
 .subtitle {
