@@ -1,10 +1,10 @@
 ﻿.gpch-footer {
     background-color: #2f538e;
     color: white;
-    padding: 1.5rem 2rem;
-    font-size: 0.9rem;
+    padding: 1rem 1rem;
+    font-size: 0.8rem;
     text-align: center;
-    margin-top: 4rem;
+    margin-top: 0;
     box-shadow: 0 -8px 8px rgba(0,0,0,0.2);
 }
 

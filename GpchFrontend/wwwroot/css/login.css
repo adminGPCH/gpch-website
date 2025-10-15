@@ -22,9 +22,9 @@
 }
 
 .subtitle {
-    margin-bottom: 2rem;
     font-size: 1rem;
-    opacity: 0.5;
+    opacity: 1;
+    margin-bottom: 4px;
 }
 
 .hover-label {
