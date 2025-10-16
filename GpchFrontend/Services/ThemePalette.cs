@@ -62,12 +62,12 @@ namespace GpchFrontend.Services
 
         public static string GetBackgroundImage(string tema) => tema switch
         {
-            "rosado" => "url('/images/fondos/fondo-rosado.webp')",
-            "burdeos" => "url('/images/fondos/fondo-burdeos.webp')",
-            "rojo" => "url('/images/fondos/fondo-rojo.webp')",
-            "amarillo" => "url('/images/fondos/fondo-amarillo.webp')",
-            "verde" => "url('/images/fondos/fondo-verde.webp')",
-            "azul" => "url('/images/fondos/fondo-azul.webp')",
+            "rosado" => "url('/images/fondos/fondo-rosado1.webp')",
+            "burdeos" => "url('/images/fondos/fondo-burdeos1.webp')",
+            "rojo" => "url('/images/fondos/fondo-rojo1.webp')",
+            "amarillo" => "url('/images/fondos/fondo-amarillo1.webp')",
+            "verde" => "url('/images/fondos/fondo-verde1.webp')",
+            "azul" => "url('/images/fondos/fondo-azul1.webp')",
             _ => "Initial"
         };
 

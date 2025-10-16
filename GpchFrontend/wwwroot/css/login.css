@@ -85,6 +85,19 @@ svg {
     gap: 4rem;
 }
 
+.gpch-animated_background {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 3rem 1rem;
+    gap: 4rem;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    flex: 1;
+}
+
+
 .gpch-bloque {
     width: 100%;
     max-width: 720px;

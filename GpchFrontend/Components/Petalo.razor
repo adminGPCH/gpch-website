@@ -24,5 +24,11 @@
 
     private string Transform => $"translate(110,110) rotate({Rotation}) scale({(IsActive ? 1.1 : 1.0)}) translate(-110,-110)";
 
-    private async Task HandleClick() => await OnClick.InvokeAsync(Id);
+    private async Task HandleClick()
+    {
+        if (!string.IsNullOrWhiteSpace(Id))
+        {
+            await OnClick.InvokeAsync(Id);
+        }
+    }
 }

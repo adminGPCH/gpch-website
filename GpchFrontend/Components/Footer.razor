@@ -1,9 +1,11 @@
 ﻿@inject GpchFrontend.Services.ThemeService Theme
 @using GpchFrontend.Services
 
-<footer class="gpch-footer" style="background-color:@ColorTema">
+<footer class="gpch-footer" style="@($"background-color:{ColorTema};")">
     <div class="footer-content">
-        <p style="color:@ColorContraste">© @DateTime.Now.Year Goerlich Pharma Chile Ltda. Propiedad intelectual protegida.</p>
+        <p style="color:@ColorContraste">
+            © @DateTime.Now.Year Goerlich Pharma Chile Ltda. Propiedad intelectual protegida.
+        </p>
     </div>
 </footer>
 
@@ -13,20 +15,14 @@
 
     protected override void OnInitialized()
     {
-        Theme.OnThemeChanged += ActualizarColor;
-        ActualizarColor();
-        Theme.OnThemeChanged += ActualizarContraste;
-        ActualizarContraste();
+        Theme.OnThemeChanged += ActualizarEstilos;
+        ActualizarEstilos();
     }
 
-    private void ActualizarColor()
-    {
-        ColorTema = ThemePalette.GetColor(Theme.TemaActual);
-        StateHasChanged();
-    }
-    private void ActualizarContraste()
+    private void ActualizarEstilos()
     {
         var tema = Theme.TemaActual;
+        ColorTema = ThemePalette.GetColor(tema);
         ColorContraste = ThemePalette.GetContraste(tema);
         StateHasChanged();
     }

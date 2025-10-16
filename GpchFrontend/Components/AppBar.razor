@@ -1,5 +1,6 @@
-﻿@inject GpchFrontend.Services.ThemeService Theme
-@using GpchFrontend.Services
+﻿@using GpchFrontend.Services
+
+@inject GpchFrontend.Services.ThemeService Theme
 @inject NavigationManager Nav
 
 <header class="gpch-appbar" style="background-color:@ColorTema">
@@ -21,27 +22,22 @@
 
     protected override void OnInitialized()
     {
-        Theme.OnThemeChanged += ActualizarColor;
-        ActualizarColor();
-        Theme.OnThemeChanged += ActualizarContraste;
-        ActualizarContraste();
+        Theme.OnThemeChanged += ActualizarEstilos;
+        ActualizarEstilos();
+
         Nav.LocationChanged += (_, args) =>
         {
-            if (args.Location.EndsWith("/"))
+            if (args.Location.EndsWith("/") && Theme.TemaActual != "azul")
             {
-                Theme.CambiarTema("azul");
+                Theme.CambiarTemaConFondo("azul", ThemePalette.GetBackgroundImage("azul"));
             }
         };
     }
 
-    private void ActualizarColor()
-    {
-        ColorTema = ThemePalette.GetColor(Theme.TemaActual);
-        StateHasChanged();
-    }
-    private void ActualizarContraste()
+    private void ActualizarEstilos()
     {
         var tema = Theme.TemaActual;
+        ColorTema = ThemePalette.GetColor(tema);
         ColorContraste = ThemePalette.GetContraste(tema);
         StateHasChanged();
     }
