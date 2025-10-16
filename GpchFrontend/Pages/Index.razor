@@ -1,13 +1,18 @@
 ﻿@page "/"
 @using GpchFrontend.Components
 @inject GpchFrontend.Services.ThemeService Theme
+@inject GpchFrontend.Services.ThemeService ThemeService
+@inject NavigationManager Navigation
 @using GpchFrontend.Services
 
 <link href="css/login.css" rel="stylesheet" />
 
-<div class="gpch-page">
-    <section class="gpch-bloque">
+<CarruselTematico @ref="Carrusel" OnImagenCambiada="ActualizarFondo" />
 
+<div class="gpch-animated_background @(animating ? "animating" : "")"
+     style="@ObtenerEstiloFondo()">
+
+    <section class="gpch-bloque">
         <NavLink href="/">
             <img src="images/logo_gpch-solo-t.png" alt="GPCH Logo" class="logo" />
         </NavLink>
@@ -21,13 +26,26 @@
         <div class="flower-container">
             <ThemeFlower Size="300" />
         </div>
+
+        <div class="gpch-domo-control">
+            <button class="domo-btn @(ThemeService.CarruselActivo ? "activo" : "")" @onclick="ToggleCarrusel">
+                @(ThemeService.CarruselActivo ? "||" : ">>")
+            </button>
+        </div>
+
     </section>
 </div>
 
 @code {
-    private string TitleColor = "#FFFFFF"; // valor inicial
-    private string TitleContrast = "#FFFFFF"; // valor inicial
+    private string TitleColor = "#FFFFFF";
+    private string TitleContrast = "#FFFFFF";
     private string ColorContraste = "#000000";
+
+    private string FondoTema = ThemePalette.GetColor("azul");
+
+    private bool animating = false;
+
+    private CarruselTematico? Carrusel;
 
     protected override void OnInitialized()
     {
@@ -36,11 +54,85 @@
             TitleColor = ThemePalette.GetTitleColor(Theme.TemaActual);
             ColorContraste = ThemePalette.GetContraste(Theme.TemaActual);
             TitleContrast = ThemePalette.GetTitleContrast(Theme.TemaActual);
-            StateHasChanged(); // fuerza re-render
+            FondoTema = ThemePalette.GetColor(Theme.TemaActual);
+            StateHasChanged();
         };
 
-        ColorContraste = ThemePalette.GetContraste(Theme.TemaActual);
         TitleColor = ThemePalette.GetTitleColor(Theme.TemaActual);
+        ColorContraste = ThemePalette.GetContraste(Theme.TemaActual);
         TitleContrast = ThemePalette.GetTitleContrast(Theme.TemaActual);
+        FondoTema = ThemePalette.GetColor(Theme.TemaActual);
+    }
+
+    protected override Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender && Carrusel is not null)
+        {
+            if (ThemeService.CarruselActivo)
+            {
+                Carrusel.ActivarCarrusel();
+            }
+            else
+            {
+                Carrusel.DetenerCarrusel();
+            }
+        }
+        return Task.CompletedTask;
+    }
+
+    private async Task ActualizarFondo(string nuevaImagen)
+    {
+        if (!string.IsNullOrWhiteSpace(nuevaImagen))
+        {
+            var esHome = string.IsNullOrEmpty(Navigation.ToBaseRelativePath(Navigation.Uri));
+
+            if (!esHome)
+            {
+                Carrusel?.DetenerAnimacion(); // ← blindaje
+                return;
+            }
+
+            animating = true;
+            Theme.CambiarTemaConFondo(Theme.TemaActual, nuevaImagen);
+            StateHasChanged();
+
+            await Task.Delay(1000);
+            animating = false;
+            StateHasChanged();
+        }
+    }
+
+    private void ToggleCarrusel()
+    {
+        ThemeService.CarruselActivo = !ThemeService.CarruselActivo;
+
+        if (Carrusel is null) return;
+
+        if (ThemeService.CarruselActivo)
+        {
+            Carrusel.ActivarCarrusel();
+        }
+        else
+        {
+            Carrusel.DetenerCarrusel();
+            ThemeService.FondoActual = ThemePalette.GetBackgroundImage(ThemeService.TemaActual);
+        }
+    }
+
+
+    private string ObtenerEstiloFondo()
+    {
+        var baseStyle = $@"
+            --gpch-tema-color:{FondoTema};
+            background-image:{Theme.FondoActual};
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;";
+
+        var transicion = Theme.CarruselActivo
+            ? "transition: background-image 0.6s ease-in-out;"
+            : "";
+
+        return baseStyle + transicion;
     }
 }

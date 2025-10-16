@@ -1,0 +1,148 @@
+﻿@inject GpchFrontend.Services.ThemeService ThemeService
+@inject NavigationManager NavigationManager
+
+@code {
+    [Parameter] public EventCallback<string> OnImagenCambiada { get; set; }
+    [Parameter] public int IntervaloMs { get; set; } = 2000;
+
+    private List<string> Imagenes => ThemeService.TemaActual switch
+    {
+        "rojo" => new()
+        {
+            "url('/images/fondos/fondo-rojo1.webp')",
+            "url('/images/fondos/fondo-rojo2.webp')",
+            "url('/images/fondos/fondo-rojo3.webp')",
+            "url('/images/fondos/fondo-rojo4.webp')",
+            "url('/images/fondos/fondo-rojo5.webp')",
+            "url('/images/fondos/fondo-rojo6.webp')"
+        },
+        "verde" => new()
+        {
+            "url('/images/fondos/fondo-verde1.webp')",
+            "url('/images/fondos/fondo-verde2.webp')",
+            "url('/images/fondos/fondo-verde3.webp')",
+            "url('/images/fondos/fondo-verde4.webp')",
+            "url('/images/fondos/fondo-verde5.webp')",
+            "url('/images/fondos/fondo-verde6.webp')"
+        },
+        "amarillo" => new()
+        {
+            "url('/images/fondos/fondo-amarillo1.webp')",
+            "url('/images/fondos/fondo-amarillo2.webp')",
+            "url('/images/fondos/fondo-amarillo3.webp')",
+            "url('/images/fondos/fondo-amarillo4.webp')",
+            "url('/images/fondos/fondo-amarillo5.webp')",
+            "url('/images/fondos/fondo-amarillo6.webp')"
+        },
+        "burdeos" => new()
+        {
+            "url('/images/fondos/fondo-burdeos1.webp')",
+            "url('/images/fondos/fondo-burdeos2.webp')",
+            "url('/images/fondos/fondo-burdeos3.webp')",
+            "url('/images/fondos/fondo-burdeos4.webp')",
+            "url('/images/fondos/fondo-burdeos5.webp')",
+            "url('/images/fondos/fondo-burdeos6.webp')"
+        },
+        "rosado" => new()
+        {
+            "url('/images/fondos/fondo-rosado1.webp')",
+            "url('/images/fondos/fondo-rosado2.webp')",
+            "url('/images/fondos/fondo-rosado3.webp')",
+            "url('/images/fondos/fondo-rosado4.webp')",
+            "url('/images/fondos/fondo-rosado5.webp')",
+            "url('/images/fondos/fondo-rosado6.webp')"
+        },
+        _ => new()
+        {
+            "url('/images/fondos/fondo-azul1.webp')",
+            "url('/images/fondos/fondo-azul2.webp')",
+            "url('/images/fondos/fondo-azul3.webp')",
+            "url('/images/fondos/fondo-azul4.webp')",
+            "url('/images/fondos/fondo-azul5.webp')",
+            "url('/images/fondos/fondo-azul6.webp')"
+        }
+    };
+
+    private int IndiceActual = 0;
+    private CancellationTokenSource? cts;
+    private bool EstaActivo = true;
+
+    protected override void OnInitialized()
+    {
+        IniciarAnimacion();
+    }
+
+    public void ActivarCarrusel()
+    {
+        EstaActivo = true;
+        IniciarAnimacion();
+    }
+
+    public void DetenerCarrusel()
+    {
+        EstaActivo = false;
+        DetenerAnimacion();
+    }
+
+
+    private void IniciarAnimacion()
+    {
+        if (!EstaActivo || cts != null) return;
+
+        NotificarCambio();
+
+        cts = new CancellationTokenSource();
+        var token = cts.Token;
+
+        _ = Task.Run(async () =>
+        {
+            while (!token.IsCancellationRequested)
+            {
+                await Task.Delay(IntervaloMs, token);
+                await InvokeAsync(Siguiente);
+            }
+        }, token);
+    }
+
+    private void Siguiente()
+    {
+        IndiceActual = (IndiceActual + 1) % Imagenes.Count;
+        NotificarCambio();
+    }
+
+    private void NotificarCambio()
+    {
+        var nuevaImagen = Imagenes[IndiceActual];
+
+        if (OnImagenCambiada.HasDelegate)
+        {
+            OnImagenCambiada.InvokeAsync(nuevaImagen);
+        }
+
+        // Ya no actualiza el fondo directamente
+    }
+
+
+    public void DetenerAnimacion()
+    {
+        cts?.Cancel();
+        cts?.Dispose();
+        cts = null;
+    }
+
+    public void Dispose()
+    {
+        DetenerAnimacion();
+    }
+
+    private void ToggleCarrusel()
+    {
+        EstaActivo = !EstaActivo;
+
+        if (EstaActivo)
+            IniciarAnimacion();
+        else
+            DetenerAnimacion();
+    }
+
+}

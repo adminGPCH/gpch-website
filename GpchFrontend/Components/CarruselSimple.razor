@@ -1,0 +1,88 @@
+﻿@inject GpchFrontend.Services.ThemeService ThemeService
+@inject NavigationManager NavigationManager
+
+@code {
+    [Parameter] public EventCallback<string> OnImagenCambiada { get; set; }
+    [Parameter] public int IntervaloMs { get; set; } = 1500;
+
+    private List<string> Imagenes = new()
+    {
+        "url('/images/fondos/fondo-amarillo1.webp')",
+        "url('/images/fondos/fondo-amarillo2.webp')",
+        "url('/images/fondos/fondo-amarillo3.webp')",
+        "url('/images/fondos/fondo-azul1.webp')",
+        "url('/images/fondos/fondo-azul2.webp')",
+        "url('/images/fondos/fondo-azul3.webp')",
+        "url('/images/fondos/fondo-burdeos1.webp')",
+        "url('/images/fondos/fondo-burdeos2.webp')",
+        "url('/images/fondos/fondo-burdeos3.webp')",
+        "url('/images/fondos/fondo-rojo1.webp')",
+        "url('/images/fondos/fondo-rojo2.webp')",
+        "url('/images/fondos/fondo-rojo3.webp')",
+        "url('/images/fondos/fondo-rosado1.webp')",
+        "url('/images/fondos/fondo-rosado2.webp')",
+        "url('/images/fondos/fondo-rosado3.webp')",
+        "url('/images/fondos/fondo-verde1.webp')",
+        "url('/images/fondos/fondo-verde2.webp')",
+        "url('/images/fondos/fondo-verde3.webp')"
+    };
+
+    private int IndiceActual = 0;
+    private CancellationTokenSource? cts;
+
+    protected override void OnInitialized()
+    {
+        IniciarAnimacion();
+    }
+
+    private void IniciarAnimacion()
+    {
+        DetenerAnimacion(); // ← blindaje previo
+
+        cts = new CancellationTokenSource();
+        var token = cts.Token;
+
+        _ = Task.Run(async () =>
+        {
+            while (!token.IsCancellationRequested)
+            {
+                await InvokeAsync(Siguiente);
+                await Task.Delay(IntervaloMs, token);
+            }
+        }, token);
+    }
+
+    private void Siguiente()
+    {
+        IndiceActual = (IndiceActual + 1) % Imagenes.Count;
+        NotificarCambio();
+    }
+
+    private void NotificarCambio()
+    {
+        if (OnImagenCambiada.HasDelegate)
+        {
+            OnImagenCambiada.InvokeAsync(Imagenes[IndiceActual]);
+        }
+
+        // Solo actualiza el fondo si estamos en la página de inicio
+        var esHome = NavigationManager.ToBaseRelativePath(NavigationManager.Uri) == "";
+        if (esHome)
+        {
+            ThemeService.FondoActual = Imagenes[IndiceActual];
+        }
+    }
+
+
+    public void DetenerAnimacion()
+    {
+        cts?.Cancel();
+        cts?.Dispose();
+        cts = null;
+    }
+
+    public void Dispose()
+    {
+        DetenerAnimacion();
+    }
+}
