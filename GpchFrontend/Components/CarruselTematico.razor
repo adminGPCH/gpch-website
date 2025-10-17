@@ -7,7 +7,7 @@
 
     private List<string> Imagenes => ThemeService.TemaActual switch
     {
-        "rojo" => new()
+        "rojo" => new List<string>
         {
             "url('/images/fondos/fondo-rojo1.webp')",
             "url('/images/fondos/fondo-rojo2.webp')",
@@ -16,7 +16,7 @@
             "url('/images/fondos/fondo-rojo5.webp')",
             "url('/images/fondos/fondo-rojo6.webp')"
         },
-        "verde" => new()
+        "verde" => new List<string>
         {
             "url('/images/fondos/fondo-verde1.webp')",
             "url('/images/fondos/fondo-verde2.webp')",
@@ -25,7 +25,7 @@
             "url('/images/fondos/fondo-verde5.webp')",
             "url('/images/fondos/fondo-verde6.webp')"
         },
-        "amarillo" => new()
+        "amarillo" => new List<string>
         {
             "url('/images/fondos/fondo-amarillo1.webp')",
             "url('/images/fondos/fondo-amarillo2.webp')",
@@ -34,7 +34,7 @@
             "url('/images/fondos/fondo-amarillo5.webp')",
             "url('/images/fondos/fondo-amarillo6.webp')"
         },
-        "burdeos" => new()
+        "burdeos" => new List<string>
         {
             "url('/images/fondos/fondo-burdeos1.webp')",
             "url('/images/fondos/fondo-burdeos2.webp')",
@@ -43,7 +43,7 @@
             "url('/images/fondos/fondo-burdeos5.webp')",
             "url('/images/fondos/fondo-burdeos6.webp')"
         },
-        "rosado" => new()
+        "rosado" => new List<string>
         {
             "url('/images/fondos/fondo-rosado1.webp')",
             "url('/images/fondos/fondo-rosado2.webp')",
@@ -52,7 +52,7 @@
             "url('/images/fondos/fondo-rosado5.webp')",
             "url('/images/fondos/fondo-rosado6.webp')"
         },
-        _ => new()
+        _ => new List<string>
         {
             "url('/images/fondos/fondo-azul1.webp')",
             "url('/images/fondos/fondo-azul2.webp')",

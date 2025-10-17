@@ -1,5 +1,6 @@
 ﻿@inherits LayoutComponentBase
 @inject NavigationManager Navigation
+@inject NavigationManager Nav
 @inject GpchFrontend.Services.ThemeService Theme
 @using GpchFrontend.Services
 @using GpchFrontend.Components
@@ -55,6 +56,13 @@
         };
 
         ActualizarEstilos();
+
+        var host = Nav.Uri;
+        if (host.Contains("goerlich-pharma.cl"))
+        {
+            Nav.NavigateTo("https://gpch.cl", forceLoad: true);
+        }
+
     }
 
     private void ActualizarEstilos()
