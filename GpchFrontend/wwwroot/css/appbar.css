@@ -1,4 +1,12 @@
-﻿
+﻿:root {
+    --gpch-appbar-height: 64px;
+}
+
+.gpch-appbar {
+    height: var(--gpch-appbar-height);
+}
+
+
 .gpch-appbar {
     background-color: #2f538e;
     color: white;

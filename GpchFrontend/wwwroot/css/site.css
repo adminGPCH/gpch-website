@@ -120,3 +120,18 @@ html, body {
 .gpch-footer {
     margin-top: auto;
 }
+
+
+.florselector-wrapper {
+    position: fixed;
+    top: calc(var(--gpch-appbar-height) + 8px); /* justo debajo de la AppBar */
+    left: 16px;
+    padding: 8px;
+    z-index: 5000;
+}
+
+@media (max-width: 1080px) {
+    .florselector-wrapper {
+        display: none;
+    }
+}

@@ -74,4 +74,22 @@ main {
         padding-left: 2rem !important;
         padding-right: 1.5rem !important;
     }
+
+    .florselector-wrapper {
+        position: fixed;
+        top: 16px;
+        left: 16px;
+        z-index: 2000; /* más alto que AppBar */
+    }
+
+
+    @media (max-width: 640px) {
+        .florselector-wrapper {
+            display: none;
+        }
+    }
+
+    
+
+
 }

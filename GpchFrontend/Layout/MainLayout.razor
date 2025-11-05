@@ -5,6 +5,13 @@
 @using GpchFrontend.Services
 @using GpchFrontend.Components
 
+@if (!EsHome)
+{
+    <div class="florselector-wrapper">
+        <ThemeFlower Size="120" />
+    </div>
+}
+
 <div class="page">
     @if (IsLoading)
     {
@@ -17,10 +24,10 @@
         <main>
             <div class="gpch-layout"
                  style="background-image: @Theme.FondoActual;
-                   background-size: cover;
-                   background-position: center;
-                   background-repeat: no-repeat;
-                   background-color: @FondoTema;">
+                           background-size: cover;
+                           background-position: center;
+                           background-repeat: no-repeat;
+                           background-color: @FondoTema;">
                 <AppBar />
                 <div class="gpch-body">
                     @Body
@@ -31,12 +38,14 @@
     }
 </div>
 
+
 @code {
     private int ThemeFontSizeBase = ThemePalette.GetFontSizeBase("rojo");
     private int ThemeSpacingBase = ThemePalette.GetSpacingBase("rojo");
     private bool IsLoading = false;
 
     private string FondoTema = ThemePalette.GetColor("rojo");
+    private bool EsHome => Navigation.ToBaseRelativePath(Navigation.Uri) == "";
 
     protected override void OnInitialized()
     {
