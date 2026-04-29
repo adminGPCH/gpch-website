@@ -1,5 +1,6 @@
 ﻿@page "/contacto"
 @using GpchFrontend.Components
+@inject IHttpClientFactory ClientFactory
 
 <link href="css/site.css" rel="stylesheet" />
 
@@ -19,30 +20,25 @@
             </a>
         </p>
     </div>
-</div
+</div>
 
 @code {
-    [Inject] public HttpClient? Http { get; set; }
+    private async Task EnviarCorreo(FormularioContacto.MailRequest datos)
+    {
+        try
+        {
+            // Usamos el cliente nombrado "Api"
+            var http = ClientFactory.CreateClient("Api");
 
-private async Task EnviarCorreo(FormularioContacto.MailRequest datos)
-{
-    if (Http is null)
-    {
-        Console.WriteLine("HttpClient no fue inyectado correctamente.");
-        return;
-    }
+            var response = await http.PostAsJsonAsync("mail/send", datos);
+            var resultado = await response.Content.ReadAsStringAsync();
 
-    try
-    {
-        var response = await Http.PostAsJsonAsync("mail/send", datos);
-        var resultado = await response.Content.ReadAsStringAsync();
-        Console.WriteLine($"Estado: {response.StatusCode}");
-        Console.WriteLine($"Respuesta del servidor: {resultado}");
-    }
-    catch (Exception ex)
-    {
-        Console.WriteLine($"Error al enviar: {ex.Message}");
+            Console.WriteLine($"Estado: {response.StatusCode}");
+            Console.WriteLine($"Respuesta del servidor: {resultado}");
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Error al enviar: {ex.Message}");
+        }
     }
 }
-
-}>
