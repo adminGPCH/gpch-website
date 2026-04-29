@@ -8,7 +8,7 @@
       "Presentaciones con diferentes unidades por empaque (50.000 a 300.000)",
       "Todas con certificación farmacéutica y calidad garantizada"
     ],
-    "PdfUrl": "docs/LISTADO CÁPSULAS DURAS.pdf"
+    "PdfUrl": "docs/gpch_capsulas_duras.pdf"
   },
   {
     "Nombre": "Cápsulas de gelatina blanda",
@@ -20,7 +20,7 @@
       "Aminoácidos y compuestos especializados: L-arginina, L-carnitina en diversas presentaciones, coenzima Q10, colágeno marino y combinaciones avanzadas",
       "Presentaciones en formatos que van desde 1.000 hasta 30.000 unidades por empaque"
     ],
-    "PdfUrl": "docs/LISTADO CÁPSULAS BLANDAS.pdf"
+    "PdfUrl": "docs/gpch_capsulas_blandas.pdf"
   },
   {
     "Nombre": "Minerales",
@@ -31,7 +31,7 @@
       "Suplementos de zinc: gluconato, óxido, citrato, glicinato y malato",
       "Disponibles en diferentes presentaciones y formatos para aplicaciones nutracéuticas"
     ],
-    "PdfUrl": "docs/MINERALES.pdf"
+    "PdfUrl": "docs/gpch_minerales.pdf"
   },
   {
     "Nombre": "Vitaminas",
@@ -42,7 +42,7 @@
       "Compuestos avanzados: coenzima Q10, PQQ y fosfato de piridoxal-5 (P5P)",
       "Disponibles en polvo y formatos de alta pureza para aplicaciones nutracéuticas"
     ],
-    "PdfUrl": "docs/VITAMINAS.pdf"
+    "PdfUrl": "docs/gpch_vitaminas.pdf"
   },
   {
     "Nombre": "Aminoácidos",
@@ -52,7 +52,7 @@
       "Formulaciones especiales: BCAA instantáneos, combinaciones con té verde, CLA y otros potenciadores",
       "Disponibles en polvo y formatos de alta pureza para aplicaciones nutracéuticas y deportivas"
     ],
-    "PdfUrl": "docs/AMINOÁCIDOS.pdf"
+    "PdfUrl": "docs/gpch_aminoacidos.pdf"
   },
   {
     "Nombre": "Extractos de hierbas",
@@ -63,6 +63,6 @@
       "Presentaciones en polvo orgánico y estandarizadas para aplicaciones nutracéuticas",
       "Opciones innovadoras como proteína de semilla de calabaza, hongo melena de león y fruta del monje"
     ],
-    "PdfUrl": "docs/EXTRACTOS DE HIERVAS.pdf"
+    "PdfUrl": "docs/gpch_extractos_hierbas.pdf"
   }
 ]

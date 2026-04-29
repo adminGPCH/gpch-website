@@ -1,15 +1,25 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 
 <head>
+    <meta name="description" content="Catálogo GPCH: cápsulas, extractos naturales, vitaminas y minerales de alta calidad en Chile.">
+    <meta name="keywords" content="cápsulas gelatina, suplementos naturales, vitaminas, GPCH, Quilicura, Chile">
+    <meta property="og:title" content="Catálogo GPCH">
+    <meta property="og:description" content="Productos nutracéuticos y suplementos de calidad.">
+    <meta property="og:type" content="website">
+    <meta name="robots" content="index, follow">
+    <meta property="og:url" content="https://gpch.cl/">
+    <meta property="og:image" content="https://gpch.cl/images/logo_gpch-solo-t.png">
+
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Goerlich Pharma Chile Ltda.</title>
+    <title>Goerlich Pharma Chile Ltda. - Cápsulas, Vitaminas y Suplementos en Chile</title>
     <base href="/" />
     <link rel="stylesheet" href="lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="css/app.css" />
     <link rel="icon" type="image/png" href="images/favicon.png" />
-    
+    <link rel="canonical" href="https://gpch.cl/">
+
     <script src="js/funcionesGPCH.js"></script>
 
     <link href="css/site.css" rel="stylesheet" />
@@ -91,10 +101,12 @@
     </div>
     <script src="_framework/blazor.webassembly.js"></script>
     <script>
-        window.getValue = function (element) {
-            return element.value;
-        };
+    // Declaramos explícitamente el tipo de parámetro
+    (window as any).getValue = function (element: HTMLInputElement): string {
+        return element.value;
+    };
     </script>
+
 
 </body>
 
