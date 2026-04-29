@@ -1,12 +1,24 @@
-﻿<Router AppAssembly="@typeof(App).Assembly">
-    <Found Context="routeData">
-        <RouteView RouteData="@routeData" DefaultLayout="@typeof(MainLayout)" />
-        <FocusOnNavigate RouteData="@routeData" Selector="h1" />
-    </Found>
-    <NotFound>
-        <PageTitle>Not found</PageTitle>
+﻿<ErrorBoundary>
+    <ChildContent>
+        <Router AppAssembly="@typeof(App).Assembly">
+            <Found Context="routeData">
+                <RouteView RouteData="@routeData" DefaultLayout="@typeof(MainLayout)" />
+                <FocusOnNavigate RouteData="@routeData" Selector="h1" />
+            </Found>
+            <NotFound>
+                <PageTitle>No encontrado</PageTitle>
+                <LayoutView Layout="@typeof(MainLayout)">
+                    <p role="alert">Lo sentimos, no existe contenido en esta dirección.</p>
+                </LayoutView>
+            </NotFound>
+        </Router>
+    </ChildContent>
+    <ErrorContent>
         <LayoutView Layout="@typeof(MainLayout)">
-            <p role="alert">Sorry, there's nothing at this address.</p>
+            <div class="error-wrapper">
+                <h1>⚠️ Ocurrió un problema</h1>
+                <p>Ha ocurrido un error inesperado. Intenta recargar la página o vuelve más tarde.</p>
+            </div>
         </LayoutView>
-    </NotFound>
-</Router>
+    </ErrorContent>
+</ErrorBoundary>

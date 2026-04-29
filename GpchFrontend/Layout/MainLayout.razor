@@ -1,6 +1,5 @@
 ﻿@inherits LayoutComponentBase
 @inject NavigationManager Navigation
-@inject NavigationManager Nav
 @inject GpchFrontend.Services.ThemeService Theme
 @using GpchFrontend.Services
 @using GpchFrontend.Components
@@ -23,11 +22,11 @@
     {
         <main>
             <div class="gpch-layout"
-                 style="background-image: @Theme.FondoActual;
-                           background-size: cover;
-                           background-position: center;
-                           background-repeat: no-repeat;
-                           background-color: @FondoTema;">
+                 style="background-image: @(Theme?.FondoActual ?? "none");
+                background-size: cover;
+                background-position: center;
+                background-repeat: no-repeat;
+                background-color: @FondoTema;">
                 <AppBar />
                 <div class="gpch-body">
                     @Body
@@ -37,7 +36,6 @@
         </main>
     }
 </div>
-
 
 @code {
     private int ThemeFontSizeBase = ThemePalette.GetFontSizeBase("rojo");
@@ -49,37 +47,51 @@
 
     protected override void OnInitialized()
     {
-        Theme.OnThemeChanged += ActualizarEstilos;
-
-        Navigation.LocationChanged += (_, __) =>
+        try
         {
-            IsLoading = true;
-            StateHasChanged();
+            Theme.OnThemeChanged += ActualizarEstilos;
 
-            _ = Task.Run(async () =>
+            Navigation.LocationChanged += (_, __) =>
             {
-                await Task.Delay(600); // duración de la transición
-                IsLoading = false;
-                await InvokeAsync(StateHasChanged);
-            });
-        };
+                IsLoading = true;
+                StateHasChanged();
 
-        ActualizarEstilos();
+                _ = Task.Run(async () =>
+                {
+                    await Task.Delay(600); // duración de la transición
+                    IsLoading = false;
+                    await InvokeAsync(StateHasChanged);
+                });
+            };
 
-        var host = Nav.Uri;
-        if (host.Contains("goerlich-pharma.cl"))
-        {
-            Nav.NavigateTo("https://gpch.cl", forceLoad: true);
+            ActualizarEstilos();
+
+            var host = Navigation.Uri;
+            if (!string.IsNullOrEmpty(host) && host.Contains("goerlich-pharma.cl"))
+            {
+                Navigation.NavigateTo("https://gpch.cl", forceLoad: true);
+            }
         }
-
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Error en OnInitialized: {ex.Message}");
+        }
     }
 
     private void ActualizarEstilos()
     {
-        var tema = Theme.TemaActual;
-        ThemeFontSizeBase = ThemePalette.GetFontSizeBase(tema);
-        ThemeSpacingBase = ThemePalette.GetSpacingBase(tema);
-        FondoTema = ThemePalette.GetColor(tema);
-        StateHasChanged();
+        try
+        {
+            var tema = Theme?.TemaActual ?? "rojo";
+            ThemeFontSizeBase = ThemePalette.GetFontSizeBase(tema);
+            ThemeSpacingBase = ThemePalette.GetSpacingBase(tema);
+            FondoTema = ThemePalette.GetColor(tema);
+            StateHasChanged();
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Error al actualizar estilos: {ex.Message}");
+            FondoTema = ThemePalette.GetColor("rojo"); // fallback seguro
+        }
     }
 }
