@@ -5,10 +5,14 @@
 <link href="css/site.css" rel="stylesheet" />
 
 <div class="contacto-wrapper">
+    <!-- H1 invisible para usuarios, visible para robots y accesibilidad -->
+    <h1 class="sr-only">Contacto GPCH</h1>
+
+    <!-- Formulario de contacto -->
     <FormularioContacto OnEnviar="EnviarCorreo" />
 
     <!-- Tarjeta institucional -->
-    <div class="bloque-texto">
+    <div class="bloque-texto mt-5">
         <h3>Goerlich Pharma Chile Ltda.</h3>
         <p><strong>Dirección:</strong> Av. Providencia 2594, Of. 501, CP 7510007, Providencia. Región Metropolitana.</p>
         <p><strong>Teléfono:</strong> +56 2 2334 2270</p>
@@ -27,9 +31,7 @@
     {
         try
         {
-            // Usamos el cliente nombrado "Api"
             var http = ClientFactory.CreateClient("Api");
-
             var response = await http.PostAsJsonAsync("mail/send", datos);
             var resultado = await response.Content.ReadAsStringAsync();
 
