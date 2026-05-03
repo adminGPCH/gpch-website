@@ -12,26 +12,6 @@
   },
   "globalHeaders": {
     "Cache-Control": "public, max-age=3600"
-  },
-  "routes": [
-    {
-      "route": "/images/*",
-      "headers": {
-        "Cache-Control": "public, max-age=2592000"
-      }
-    },
-    {
-      "route": "/css/*",
-      "headers": {
-        "Cache-Control": "public, max-age=604800"
-      }
-    },
-    {
-      "route": "/js/*",
-      "headers": {
-        "Cache-Control": "public, max-age=604800"
-      }
-    }
-  ]
+  }
 }
 

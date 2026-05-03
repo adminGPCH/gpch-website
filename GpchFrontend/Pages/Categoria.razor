@@ -1,0 +1,106 @@
+﻿@page "/productos/{id}"
+@using GpchFrontend.Services
+@inject IHttpClientFactory ClientFactory
+@inject GpchFrontend.Services.ThemeService Theme
+
+<link href="lib/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
+<link href="css/site.css" rel="stylesheet" />
+<link href="css/categoria.css" rel="stylesheet" />
+
+@if (categoria == null)
+{
+    <p>Cargando categoría...</p>
+}
+else
+{
+    <HeadContent>
+        <title>@categoria.Title - GPCH</title>
+        <meta name="description" content="@categoria.AbstractExtended" />
+    </HeadContent>
+
+    <!-- Botón flotante Cotice aquí -->
+    <a href="/contacto" class="cotice-btn"
+       style="background-color:@ColorTema; color:@ColorContraste">
+        Cotice aquí
+    </a>
+
+    <div class="categoria-wrapper" style="--color-tema:@ColorTema; --color-contraste:@ColorContraste;">
+        <div class="categoria-header">
+            <h2>@categoria.Title</h2>
+        </div>
+
+        @if (!string.IsNullOrEmpty(categoria.AbstractExtended))
+        {
+            <p class="categoria-abstract">@categoria.AbstractExtended</p>
+        }
+
+        <ul class="productos-ul">
+            @foreach (var prod in categoria.ProductList)
+            {
+                <li>
+                    @if (!string.IsNullOrEmpty(prod.Descripcion))
+                    {
+                        <strong>@prod.Nombre:</strong> 
+                        @prod.Descripcion
+                    }
+                    else
+                    {
+                        <strong>@prod.Nombre</strong>
+                    }
+                </li>
+            }
+        </ul>
+
+
+        <div class="acciones-categoria">
+            @if (!string.IsNullOrEmpty(categoria.PdfUrl))
+            {
+                <a href="@categoria.PdfUrl" class="descargar-btn" download>Descargar catálogo</a>
+            }
+            <a href="/productos" class="volver-btn">← Volver</a>
+        </div>
+
+    </div>
+}
+
+
+@code {
+    [Parameter] public string id { get; set; }
+
+    private CategoriaProducto categoria;
+
+    private string ColorTema = "#b71c1c";
+    private string ColorContraste = "#ffffff";
+
+    protected override async Task OnInitializedAsync()
+    {
+        var http = ClientFactory.CreateClient("Static");
+        categoria = await http.GetFromJsonAsync<CategoriaProducto>($"docs/{id}.json");
+
+        Theme.OnThemeChanged += ActualizarEstilos;
+        ActualizarEstilos();
+    }
+
+    private void ActualizarEstilos()
+    {
+        var tema = Theme.TemaActual;
+        ColorTema = ThemePalette.GetColor(tema);
+        ColorContraste = ThemePalette.GetContraste(tema);
+        StateHasChanged();
+    }
+
+    public class CategoriaProducto
+    {
+        public string Title { get; set; }
+        public string AbstractExtended { get; set; }
+        public string PdfUrl { get; set; }   // 👈 nueva propiedad
+        public List<Producto> ProductList { get; set; }
+    }
+
+
+    public class Producto
+    {
+        public string Nombre { get; set; }
+        public string Descripcion { get; set; }
+    }
+}

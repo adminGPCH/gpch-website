@@ -8,68 +8,75 @@
 <link href="css/site.css" rel="stylesheet" />
 <link href="css/productos.css" rel="stylesheet" />
 
+<!-- Botón flotante Cotice aquí -->
 <a href="/contacto" class="cotice-btn"
    style="background-color:@ColorTema; color:@ColorContraste">
     Cotice aquí
 </a>
 
 <div class="productos-wrapper">
+    <!-- Intro -->
     <section class="bloque-texto text-center mb-5">
         <h1 class="catalogo-title">Catálogo GPCH</h1>
-        <p class="fw-bold mb-3">
-            Tenemos una amplia gama de productos para su negocio o emprendimiento.
-        </p>
-        <p class="fw-bold mb-3">
-            Todos de la mejor calidad y con el respaldo de GPCH.
-        </p>
-        <p class="fw-bold mb-0">
-            Explore nuestras categorías y descubra lo que tenemos para usted.
-        </p>
+        <p class="fw-bold mb-3">Tenemos una amplia gama de productos para su negocio o emprendimiento.</p>
+        <p class="fw-bold mb-3">Todos de la mejor calidad y con el respaldo de GPCH.</p>
+        <p class="fw-bold mb-0">Explore nuestras categorías y descubra lo que tenemos para usted.</p>
     </section>
 
-
-    <section class="bloque-texto mt-5">
-        <h3 class="text-center mb-4">Categorías de productos</h3>
-
-        <div class="d-flex flex-wrap justify-content-center gap-4">
-            @if (categorias != null)
+    <!-- 🔹 Tarjetas -->
+    <div class="categorias-grid">
+        @if (categorias != null)
+        {
+            @foreach (var cat in categorias)
             {
-                @foreach (var cat in categorias)
-                {
-                    <div class="card shadow-sm">
-                        <div class="card-body text-center">
-                            <h5 class="card-title">@cat.Nombre</h5>
-                            <ul class="mb-3 text-start">
-                                @foreach (var item in cat.Resumen)
-                                {
-                                    <li>@item</li>
-                                }
-                            </ul>
-                            <a href="@cat.PdfUrl" target="_blank" download class="btn btn-primary">
-                                📄 Descargar
-                            </a>
-                        </div>
+                <div class="card categoria-card">
+                    <!-- Encabezado con fondo del tema -->
+                    <div class="card-header"
+                         style=@($"background-color:{ColorTema}; text-align:center; border-bottom:1px solid rgba(0,0,0,0.1);")>
+                        <h5 class="mb-0"
+                            style=@($"color:{ColorContraste}; font-weight:700; font-size:1.2rem; margin:0;")>
+                            @cat.Title
+                        </h5>
                     </div>
-                }
+
+                    <!-- Imagen -->
+                    @if (!string.IsNullOrEmpty(cat.ImagenUrl))
+                    {
+                        <img src="@cat.ImagenUrl" alt="@cat.Title"
+                             style="width:180px; height:auto; margin:1.2rem auto; display:block; object-fit:contain; transition:transform 0.3s ease;" />
+                    }
+
+                    <!-- Abstract -->
+                    @if (!string.IsNullOrEmpty(cat.Abstract))
+                    {
+                        <p style="font-size:0.95rem; color:#333; font-weight:500; margin:0.5rem 1rem 1rem 1rem;">
+                            @cat.Abstract
+                        </p>
+                    }
+
+                    <!-- Botón Ver más -->
+                    <a href="@cat.UrlCategoria"
+                       style=@($"display:inline-block; font-weight:600; padding:0.6rem 1.4rem; border-radius:8px; margin:1rem auto; background-color:{ColorTema}; color:{ColorContraste}; box-shadow:0 4px 10px rgba(0,0,0,0.15); transition:background-color 0.3s ease, transform 0.2s ease; text-decoration:none;")>
+                        Ver más...
+                    </a>
+                </div>
             }
-        </div>
-    </section>
+        }
+    </div>
+
 </div>
 
 @code {
     private List<CategoriaProducto> categorias;
 
-    // Colores dinámicos del botón
-    private string ColorTema = "#b71c1c";       // valor inicial
-    private string ColorContraste = "#ffffff";  // valor inicial
+    private string ColorTema = "#b71c1c";
+    private string ColorContraste = "#ffffff";
 
     protected override async Task OnInitializedAsync()
     {
         var http = ClientFactory.CreateClient("Static");
         categorias = await http.GetFromJsonAsync<List<CategoriaProducto>>("docs/categorias.json");
-        // Console.WriteLine($"Se cargaron {categorias?.Count} categorías");
 
-        // Suscribirse al evento de cambio de tema
         Theme.OnThemeChanged += ActualizarEstilos;
         ActualizarEstilos();
     }
@@ -79,13 +86,14 @@
         var tema = Theme.TemaActual;
         ColorTema = ThemePalette.GetColor(tema);
         ColorContraste = ThemePalette.GetContraste(tema);
-        StateHasChanged(); // refresca la UI
+        StateHasChanged();
     }
 
     public class CategoriaProducto
     {
-        public string Nombre { get; set; }
-        public List<string> Resumen { get; set; }
-        public string PdfUrl { get; set; }
+        public string Title { get; set; }
+        public string ImagenUrl { get; set; }
+        public string Abstract { get; set; }
+        public string UrlCategoria { get; set; }
     }
 }

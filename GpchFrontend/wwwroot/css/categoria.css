@@ -1,0 +1,127 @@
+﻿/* 🔹 Contenedor principal de categoría */
+.categoria-wrapper {
+    max-width: 900px;
+    margin: 2rem auto;
+    padding: 2rem;
+    background-color: rgba(255,255,255,0.95);
+    border-radius: 12px;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.15);
+}
+
+/* 🔹 Encabezado */
+.categoria-header {
+    background-color: var(--color-tema);
+    color: var(--color-contraste);
+    padding: 1rem;
+    text-align: center;
+    border-radius: 8px;
+    margin-bottom: 1.5rem;
+}
+
+/* 🔹 Imagen */
+.categoria-img {
+    max-width: 300px;
+    margin: 1rem auto;
+    display: block;
+}
+
+/* 🔹 Abstract */
+.categoria-abstract {
+    font-size: 1rem;
+    color: #333;
+    margin: 1rem 0;
+    text-align: center;
+}
+
+/* 🔹 Lista de productos con viñetas */
+.productos-ul {
+    list-style: none;
+    padding-left: 0;
+    margin: 1rem 0;
+}
+
+    .productos-ul li {
+        position: relative;
+        padding-left: 1.8rem;
+        margin-bottom: 0.8rem;
+        font-size: 1.05rem;
+        color: #333;
+    }
+
+        .productos-ul li::before {
+            content: "✔"; /* o "•" según prefieras */
+            position: absolute;
+            left: 0;
+            color: var(--color-tema);
+            font-weight: bold;
+        }
+
+/* 🔹 Botones de acción (Descargar + Volver) */
+.acciones-categoria {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    margin-top: 2rem;
+}
+
+.descargar-btn {
+    display: inline-block;
+    font-weight: 600;
+    padding: 0.6rem 1.4rem;
+    border-radius: 8px;
+    background-color: var(--color-tema);
+    color: var(--color-contraste);
+    box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    text-decoration: none;
+}
+
+    .descargar-btn:hover {
+        transform: scale(1.05);
+        filter: brightness(1.1);
+    }
+
+.volver-btn {
+    background-color: #666;
+    color: #fff;
+    border-radius: 6px;
+    padding: 0.6rem 1.2rem;
+    text-decoration: none;
+}
+
+/* 🔹 Botón flotante Cotice aquí */
+.cotice-btn {
+    position: fixed;
+    top: 80px;
+    right: 20px;
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    text-decoration: none;
+    cursor: pointer;
+    box-shadow: 0 0 10px rgba(0,0,0,0.3);
+    animation: pulse 2s infinite;
+    z-index: 9999;
+}
+
+/* 🔹 Animación de pulso */
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+        box-shadow: 0 0 10px rgba(0,0,0,0.6);
+    }
+
+    50% {
+        transform: scale(1.1);
+        box-shadow: 0 0 20px rgba(0,0,0,0.8);
+    }
+
+    100% {
+        transform: scale(1);
+        box-shadow: 0 0 10px rgba(0,0,0,0.6);
+    }
+}

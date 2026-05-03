@@ -1,0 +1,99 @@
+{
+  "Title": "Minerales",
+  "AbstractExtended": "Listado de minerales en diferentes presentaciones y sales, disponibles en polvo y cristalizados para aplicaciones nutracéuticas y farmacéuticas.",
+  "PdfUrl": "/docs/gpch_minerales.pdf",
+  "ProductList": [
+    {
+      "Nombre": "Citrato de calcio",
+      "Descripcion": ""
+    },
+    {
+      "Nombre": "Citrato malato de calcio",
+      "Descripcion": ""
+    },
+    {
+      "Nombre": "Carbonato de calcio",
+      "Descripcion": ""
+    },
+    {
+      "Nombre": "Acetato de calcio",
+      "Descripcion": ""
+    },
+    {
+      "Nombre": "Óxido de calcio",
+      "Descripcion": ""
+    },
+    {
+      "Nombre": "Glicinato de calcio",
+      "Descripcion": ""
+    },
+    {
+      "Nombre": "Gluconato de calcio",
+      "Descripcion": ""
+    },
+    {
+      "Nombre": "Lactato de calcio",
+      "Descripcion": ""
+    },
+    {
+      "Nombre": "Orotato de calcio",
+      "Descripcion": ""
+    },
+    {
+      "Nombre": "Malato de calcio",
+      "Descripcion": ""
+    },
+    {
+      "Nombre": "Citrato de magnesio en polvo",
+      "Descripcion": ""
+    },
+    {
+      "Nombre": "Gluconato de magnesio en polvo",
+      "Descripcion": ""
+    },
+    {
+      "Nombre": "Óxido de magnesio en polvo",
+      "Descripcion": ""
+    },
+    {
+      "Nombre": "Carbonato de magnesio",
+      "Descripcion": ""
+    },
+    {
+      "Nombre": "Glicinato de magnesio",
+      "Descripcion": ""
+    },
+    {
+      "Nombre": "Citrato de potasio cristalizado en polvo",
+      "Descripcion": ""
+    },
+    {
+      "Nombre": "Yoduro de potasio 3% en polvo",
+      "Descripcion": ""
+    },
+    {
+      "Nombre": "Sorbato de potasio en polvo",
+      "Descripcion": ""
+    },
+    {
+      "Nombre": "Gluconato de zinc en polvo",
+      "Descripcion": ""
+    },
+    {
+      "Nombre": "Óxido de zinc en polvo",
+      "Descripcion": ""
+    },
+    {
+      "Nombre": "Citrato de zinc",
+      "Descripcion": ""
+    },
+    {
+      "Nombre": "Glicinato de zinc",
+      "Descripcion": ""
+    },
+    {
+      "Nombre": "Malato de zinc",
+      "Descripcion": ""
+    }
+  ]
+}

@@ -1,0 +1,91 @@
+{
+  "Title": "Vitaminas",
+  "AbstractExtended": "Listado de vitaminas en polvo y derivados, disponibles en diferentes presentaciones y purezas para aplicaciones nutracéuticas y farmacéuticas.",
+  "PdfUrl": "/docs/gpch_vitaminas.pdf",
+  "ProductList": [
+    {
+      "Nombre": "Ácido ascórbico",
+      "Descripcion": ""
+    },
+    {
+      "Nombre": "Ácido ascórbico granular",
+      "Descripcion": ""
+    },
+    {
+      "Nombre": "Palmitato de ascorbilo",
+      "Descripcion": ""
+    },
+    {
+      "Nombre": "Biotina (vitamina B7) en polvo",
+      "Descripcion": ""
+    },
+    {
+      "Nombre": "Coenzima Q10 en polvo",
+      "Descripcion": ""
+    },
+    {
+      "Nombre": "Vitamina E (DL-alfa-tocoferil 50%)",
+      "Descripcion": ""
+    },
+    {
+      "Nombre": "Ácido fólico 100% puro (vitamina B9) en polvo",
+      "Descripcion": ""
+    },
+    {
+      "Nombre": "Fosfato de piridoxal-5 (P5P) en polvo",
+      "Descripcion": ""
+    },
+    {
+      "Nombre": "Pirroloquinolina quinona (PQQ) 100% pura en polvo",
+      "Descripcion": ""
+    },
+    {
+      "Nombre": "Riboflavina-5-fosfato sodio (vitamina B2)",
+      "Descripcion": ""
+    },
+    {
+      "Nombre": "Ascorbato de sodio",
+      "Descripcion": ""
+    },
+    {
+      "Nombre": "Vitamina B1 (clorhidrato de tiamina) en polvo",
+      "Descripcion": ""
+    },
+    {
+      "Nombre": "Vitamina B2 (riboflavina) en polvo",
+      "Descripcion": ""
+    },
+    {
+      "Nombre": "Vitamina B3 (niacinamida) en polvo",
+      "Descripcion": ""
+    },
+    {
+      "Nombre": "Vitamina B5 (pantotenato de calcio) en polvo",
+      "Descripcion": ""
+    },
+    {
+      "Nombre": "Vitamina B6 (piridoxina HCL) en polvo",
+      "Descripcion": ""
+    },
+    {
+      "Nombre": "Vitamina B12 (metilcobalamina 99,8% pura) en polvo",
+      "Descripcion": ""
+    },
+    {
+      "Nombre": "Vitamina B12 (cianocobalamina 99,8% pura) en polvo",
+      "Descripcion": ""
+    },
+    {
+      "Nombre": "Vitamina B12 1% (cianocobalamina) en polvo",
+      "Descripcion": ""
+    },
+    {
+      "Nombre": "Vitamina D3 (colecalciferol) en polvo",
+      "Descripcion": ""
+    },
+    {
+      "Nombre": "Vitamina D3 (vegana) en polvo",
+      "Descripcion": ""
+    }
+  ]
+}
