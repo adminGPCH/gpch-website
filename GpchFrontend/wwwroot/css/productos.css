@@ -1,5 +1,5 @@
 ﻿/* 🔹 Tarjeta elegante */
-.categoria-card {
+.gpch-card {
     width: 22rem;
     border-radius: 14px;
     overflow: hidden;
@@ -10,29 +10,28 @@
     text-align: center;
 }
 
-    .categoria-card:hover {
+    .gpch-card:hover {
         transform: translateY(-8px);
         box-shadow: 0 12px 24px rgba(0, 0, 0, 0.25);
     }
 
 /* 🔹 Encabezado con fondo del tema */
-.card-header {
+.gpch-card-header {
     padding: 1rem;
     text-align: center;
     border-bottom: 1px solid rgba(0, 0, 0, 0.1);
-    background-color: var(--color-tema); /* fondo dinámico */
+    background-color: var(--color-tema);
 }
 
-    /* 🔹 Título con contraste */
-    .card-header h5.card-title {
-        color: var(--color-contraste) !important; /* texto dinámico */
+    .gpch-card-header h5 {
+        color: var(--color-contraste);
         font-size: 1.2rem;
         font-weight: 700;
         margin: 0;
     }
 
 /* 🔹 Imagen */
-.categoria-card img {
+.gpch-card img {
     width: 180px;
     height: auto;
     margin: 1.2rem auto;
@@ -41,12 +40,12 @@
     transition: transform 0.3s ease;
 }
 
-.categoria-card:hover img {
+.gpch-card:hover img {
     transform: scale(1.05);
 }
 
 /* 🔹 Abstract */
-.card-abstract {
+.gpch-card-abstract {
     font-size: 0.95rem;
     color: #333;
     font-weight: 500;
@@ -54,7 +53,7 @@
 }
 
 /* 🔹 Botón Ver más centrado y elegante */
-.ver-mas-btn {
+.gpch-btn {
     display: inline-block;
     font-weight: 600;
     padding: 0.6rem 1.4rem;
@@ -67,13 +66,13 @@
     text-decoration: none;
 }
 
-    .ver-mas-btn:hover {
+    .gpch-btn:hover {
         transform: scale(1.05);
         filter: brightness(1.1);
     }
 
 /* 🔹 Botón flotante Cotice aquí */
-.cotice-btn {
+.gpch-cotice-btn {
     position: fixed;
     top: 80px;
     right: 20px;
@@ -87,12 +86,12 @@
     text-decoration: none;
     cursor: pointer;
     box-shadow: 0 0 10px rgba(0,0,0,0.3);
-    animation: pulse 2s infinite;
+    animation: gpch-pulse 2s infinite;
     z-index: 9999;
 }
 
 /* 🔹 Animación de pulso */
-@keyframes pulse {
+@keyframes gpch-pulse {
     0% {
         transform: scale(1);
         box-shadow: 0 0 10px rgba(0,0,0,0.6);
@@ -110,7 +109,7 @@
 }
 
 /* 🔹 Grid */
-.categorias-grid {
+.gpch-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(22rem, 1fr));
     gap: 1.5rem;
@@ -119,7 +118,7 @@
 }
 
 /* 🔹 Título principal del catálogo */
-.catalogo-title {
+.gpch-catalogo-title {
     color: #b71c1c;
     font-weight: 800;
     font-size: 2.5rem;

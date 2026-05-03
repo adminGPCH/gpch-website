@@ -9,63 +9,56 @@
 <link href="css/productos.css" rel="stylesheet" />
 
 <!-- Botón flotante Cotice aquí -->
-<a href="/contacto" class="cotice-btn"
-   style="background-color:@ColorTema; color:@ColorContraste">
+<a href="/contacto" class="gpch-cotice-btn"
+   style=@($"background-color:{ColorTema}; color:{ColorContraste};")>
     Cotice aquí
 </a>
 
 <div class="productos-wrapper">
     <!-- Intro -->
     <section class="bloque-texto text-center mb-5">
-        <h1 class="catalogo-title">Catálogo GPCH</h1>
+        <h1 class="gpch-catalogo-title">Catálogo GPCH</h1>
         <p class="fw-bold mb-3">Tenemos una amplia gama de productos para su negocio o emprendimiento.</p>
         <p class="fw-bold mb-3">Todos de la mejor calidad y con el respaldo de GPCH.</p>
         <p class="fw-bold mb-0">Explore nuestras categorías y descubra lo que tenemos para usted.</p>
     </section>
 
     <!-- 🔹 Tarjetas -->
-    <div class="categorias-grid">
-        @if (categorias != null)
+    <div class="gpch-grid">
+        @if (categorias != null && categorias.Any())
         {
             @foreach (var cat in categorias)
             {
-                <div class="card categoria-card">
-                    <!-- Encabezado con fondo del tema -->
-                    <div class="card-header"
-                         style=@($"background-color:{ColorTema}; text-align:center; border-bottom:1px solid rgba(0,0,0,0.1);")>
-                        <h5 class="mb-0"
-                            style=@($"color:{ColorContraste}; font-weight:700; font-size:1.2rem; margin:0;")>
-                            @cat.Title
-                        </h5>
+                <div class="gpch-card">
+                    <div class="gpch-card-header" style=@($"background-color:{ColorTema};")>
+                        <h5 style=@($"color:{ColorContraste};")>@cat.Title</h5>
                     </div>
 
-                    <!-- Imagen -->
                     @if (!string.IsNullOrEmpty(cat.ImagenUrl))
                     {
-                        <img src="@cat.ImagenUrl" alt="@cat.Title"
-                             style="width:180px; height:auto; margin:1.2rem auto; display:block; object-fit:contain; transition:transform 0.3s ease;" />
+                        <img src="@cat.ImagenUrl" alt="@cat.Title" />
                     }
 
-                    <!-- Abstract -->
                     @if (!string.IsNullOrEmpty(cat.Abstract))
                     {
-                        <p style="font-size:0.95rem; color:#333; font-weight:500; margin:0.5rem 1rem 1rem 1rem;">
-                            @cat.Abstract
-                        </p>
+                        <p class="gpch-card-abstract">@cat.Abstract</p>
                     }
 
-                    <!-- Botón Ver más -->
-                    <a href="@cat.UrlCategoria"
-                       class="ver-mas-btn"
-                       style=@($"background-color:{ColorTema}; color:{ColorContraste};")>
-                        Ver más...
-                    </a>
-
+                    @if (!string.IsNullOrEmpty(cat.UrlCategoria))
+                    {
+                        <a href="@cat.UrlCategoria" class="gpch-btn"
+                           style=@($"background-color:{ColorTema}; color:{ColorContraste};")>
+                            Ver más...
+                        </a>
+                    }
                 </div>
             }
         }
+        else
+        {
+            <p class="text-center">No hay categorías disponibles en este momento.</p>
+        }
     </div>
-
 </div>
 
 @code {
@@ -86,8 +79,8 @@
     private void ActualizarEstilos()
     {
         var tema = Theme.TemaActual;
-        ColorTema = ThemePalette.GetColor(tema);
-        ColorContraste = ThemePalette.GetContraste(tema);
+        ColorTema = ThemePalette.GetColor(tema) ?? "#b71c1c";
+        ColorContraste = ThemePalette.GetContraste(tema) ?? "#ffffff";
         StateHasChanged();
     }
 
