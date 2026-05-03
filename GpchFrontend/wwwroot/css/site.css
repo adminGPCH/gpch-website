@@ -153,3 +153,8 @@ html, body {
     text-transform: uppercase;
     margin-bottom: 1.5rem;
 }
+
+.bloque-texto strong {
+    font-weight: 700; /* o 600 si prefieres menos grueso */
+    color: #000; /* opcional, para reforzar contraste */
+}
