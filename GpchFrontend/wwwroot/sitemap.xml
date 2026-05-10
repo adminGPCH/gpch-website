@@ -12,6 +12,12 @@
 		<loc>https://gpch.cl/productos</loc>
 		<priority>0.9</priority>
 	</url>
+	
+	<!-- Identidad -->
+	<url>
+		<loc>https://gpch.cl/identidad</loc>
+		<priority>0.7</priority>
+	</url>
 
 	<!-- Contacto -->
 	<url>

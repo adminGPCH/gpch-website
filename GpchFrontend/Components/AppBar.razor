@@ -3,15 +3,16 @@
 @inject GpchFrontend.Services.ThemeService Theme
 @inject NavigationManager Nav
 
-<header class="gpch-appbar" style="background-color:@ColorTema">
+<header class="gpch-appbar" style=@($"background-color:{ColorTema}")>
     <div class="appbar-content">
         <NavLink href="/" class="appbar-logo-link">
             <img src="images/logo_gpch-solo-t.png" alt="GPCH Logo" class="appbar-logo" />
         </NavLink>
 
         <nav class="appbar-nav">
-            <a style="color:@ColorContraste" href="/">Inicio</a>
-            <a style="color:@ColorContraste" href="/contacto">Contacto</a>
+            <a style=@($"color:{ColorContraste}") href="/">Inicio</a>
+            <a style=@($"color:{ColorContraste}") href="/productos">Productos</a>
+            <a style=@($"color:{ColorContraste}") href="/contacto">Contacto</a>
         </nav>
     </div>
 </header>
