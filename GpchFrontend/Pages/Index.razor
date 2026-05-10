@@ -104,20 +104,17 @@
 
     private void ToggleCarrusel()
     {
-        ThemeService.CarruselActivo = !ThemeService.CarruselActivo;
-
-        if (Carrusel is null) return;
-
         if (ThemeService.CarruselActivo)
         {
-            Carrusel.ActivarCarrusel();
+            Carrusel?.DetenerCarrusel();
+            ThemeService.FondoActual = ThemePalette.GetBackgroundImage(ThemeService.TemaActual);
         }
         else
         {
-            Carrusel.DetenerCarrusel();
-            ThemeService.FondoActual = ThemePalette.GetBackgroundImage(ThemeService.TemaActual);
+            Carrusel?.ActivarCarrusel();
         }
     }
+
 
 
     private string ObtenerEstiloFondo()

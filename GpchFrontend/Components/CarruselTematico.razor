@@ -65,29 +65,28 @@
 
     private int IndiceActual = 0;
     private CancellationTokenSource? cts;
-    private bool EstaActivo = true;
 
     protected override void OnInitialized()
     {
-        IniciarAnimacion();
+        if (ThemeService.CarruselActivo)
+            IniciarAnimacion();
     }
 
     public void ActivarCarrusel()
     {
-        EstaActivo = true;
+        ThemeService.CarruselActivo = true;
         IniciarAnimacion();
     }
 
     public void DetenerCarrusel()
     {
-        EstaActivo = false;
+        ThemeService.CarruselActivo = false;
         DetenerAnimacion();
     }
 
-
     private void IniciarAnimacion()
     {
-        if (!EstaActivo || cts != null) return;
+        if (!ThemeService.CarruselActivo || cts != null) return;
 
         NotificarCambio();
 
@@ -96,7 +95,7 @@
 
         _ = Task.Run(async () =>
         {
-            while (!token.IsCancellationRequested)
+            while (!token.IsCancellationRequested && ThemeService.CarruselActivo)
             {
                 await Task.Delay(IntervaloMs, token);
                 await InvokeAsync(Siguiente);
@@ -106,6 +105,8 @@
 
     private void Siguiente()
     {
+        if (!ThemeService.CarruselActivo || cts == null) return;
+
         IndiceActual = (IndiceActual + 1) % Imagenes.Count;
         NotificarCambio();
     }
@@ -115,13 +116,8 @@
         var nuevaImagen = Imagenes[IndiceActual];
 
         if (OnImagenCambiada.HasDelegate)
-        {
             OnImagenCambiada.InvokeAsync(nuevaImagen);
-        }
-
-        // Ya no actualiza el fondo directamente
     }
-
 
     public void DetenerAnimacion()
     {
@@ -134,15 +130,4 @@
     {
         DetenerAnimacion();
     }
-
-    private void ToggleCarrusel()
-    {
-        EstaActivo = !EstaActivo;
-
-        if (EstaActivo)
-            IniciarAnimacion();
-        else
-            DetenerAnimacion();
-    }
-
 }
