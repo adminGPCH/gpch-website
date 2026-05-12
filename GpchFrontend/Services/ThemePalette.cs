@@ -24,7 +24,7 @@ namespace GpchFrontend.Services
         public static string GetTitleColor(string tema) => tema switch
         {
             "rosado" => "#3E3A36",
-            "burdeos" => "#281414",
+            "burdeos" => "#E8D5B7",
             "rojo" => "#fab069",
             "amarillo" => "#3B2F00",
             "verde" => "#0e2b0c",
