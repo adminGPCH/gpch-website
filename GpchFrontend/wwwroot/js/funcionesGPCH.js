@@ -11,3 +11,10 @@ window.gpchMouseTracker = {
         });
     }
 };
+
+window.playSound = function (path) {
+    var audio = new Audio(path);
+    audio.load(); // fuerza precarga
+    audio.play();
+};
+

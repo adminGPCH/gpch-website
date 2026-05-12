@@ -3,6 +3,7 @@
 @using GpchFrontend.Services
 @inject NavigationManager Navigation
 @inject GpchFrontend.Services.ThemeService Theme
+@inject IJSRuntime JS
 
 <div class="flower-container">
     <div class="theme-flower" style="position: relative; width:@($"{Size}px");">
@@ -45,7 +46,7 @@
         ActualizarEstilos();
     }
 
-    private void Hover(string? id)
+    private async void Hover(string? id)
     {
         HoveredPetal = id;
 
@@ -55,6 +56,9 @@
             TextoHover = petalo?.Nombre ?? "";
             Theme.CambiarTema(id);
             ActivePetal = id;
+
+            // Sonido al hover
+            await JS.InvokeVoidAsync("playSound", "/sounds/gpch_petal_hover_3.mp3");
         }
         else
         {
@@ -62,10 +66,13 @@
         }
     }
 
-    private void Navegar(string id)
+    private async void Navegar(string id)
     {
         var petalo = Petalos.FirstOrDefault(p => p.Id == id);
         if (petalo is null) return;
+
+        // Sonido al clic
+        await JS.InvokeVoidAsync("playSound", "/sounds/gpch_petal_hover_2.mp3");
 
         Navigation.NavigateTo(petalo.Ruta);
     }
