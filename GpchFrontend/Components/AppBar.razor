@@ -2,18 +2,34 @@
 
 @inject GpchFrontend.Services.ThemeService Theme
 @inject NavigationManager Nav
+@inject IJSRuntime JS
 
-<header class="gpch-appbar" style=@($"background-color:{ColorTema}")>
+<header class="gpch-appbar" style=@($"background-color:{ToRgba(ColorTema, 0.75)}")>
     <div class="appbar-content">
-        <NavLink href="/" class="appbar-logo-link">
-            <img src="images/logo_gpch-solo-t.png" alt="GPCH Logo" class="appbar-logo" />
+        <NavLink href="/" @onclick="PlayLogoClickSound">
+            <img src="images/logo_gpch-solo-t.png"
+                 alt="GPCH Logo"
+                 class="appbar-logo"
+                 @onmouseover="PlayLogoHoverSound" />
         </NavLink>
 
         <nav class="appbar-nav">
-            <a style=@($"color:{ColorContraste}") href="/">Inicio</a>
-            <a style=@($"color:{ColorContraste}") href="/productos">Productos</a>
-            <a style=@($"color:{ColorContraste}") href="/contacto">Contacto</a>
+            <a style=@($"color:{ColorContraste}")
+               href="/"
+               @onmouseover="PlayMenuHoverSound"
+               @onclick="PlayMenuClickSound">Inicio</a>
+
+            <a style=@($"color:{ColorContraste}")
+               href="/productos"
+               @onmouseover="PlayMenuHoverSound"
+               @onclick="PlayMenuClickSound">Productos</a>
+
+            <a style=@($"color:{ColorContraste}")
+               href="/contacto"
+               @onmouseover="PlayMenuHoverSound"
+               @onclick="PlayMenuClickSound">Contacto</a>
         </nav>
+
     </div>
 </header>
 
@@ -41,5 +57,31 @@
         ColorTema = ThemePalette.GetColor(tema);
         ColorContraste = ThemePalette.GetContraste(tema);
         StateHasChanged();
+    }
+
+    private string ToRgba(string hex, double alpha)
+    {
+        var color = System.Drawing.ColorTranslator.FromHtml(hex);
+        return $"rgba({color.R}, {color.G}, {color.B}, {alpha})";
+    }
+
+    private async Task PlayLogoHoverSound()
+    {
+        await JS.InvokeVoidAsync("playSound", "/sounds/gpch_menu_hover.mp3");
+    }
+
+    private async Task PlayLogoClickSound()
+    {
+        await JS.InvokeVoidAsync("playSound", "/sounds/gpch_menu_clic.mp3");
+    }
+
+    private async Task PlayMenuHoverSound()
+    {
+        await JS.InvokeVoidAsync("playSound", "/sounds/gpch_menu_hover.mp3");
+    }
+
+    private async Task PlayMenuClickSound()
+    {
+        await JS.InvokeVoidAsync("playSound", "/sounds/gpch_menu_clic.mp3");
     }
 }

@@ -31,3 +31,8 @@ font-weight: 500;
 .footer-content nav a:hover {
 text-decoration: underline;
 }
+
+.gpch-footer {
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px); /* soporte Safari */
+}

@@ -17,35 +17,38 @@
     border-radius: 12px;
     padding: 2rem;
     box-shadow: 0 8px 24px rgba(0,0,0,0.1);
-    font-family: "Quicksand", sans-serif;
-    font-optical-sizing: auto;
+    font-family: "Calibri", "Segoe UI", "Arial", sans-serif; /* reemplazo de Quicksand */
     font-weight: 300;
-    font-style: initial;
+    font-style: normal;
     box-sizing: border-box;
     margin: 0 auto;
 }
 
-    .bloque-texto h3 {
-        margin-bottom: 1rem;
-        color: #b71c1c;
-        font-size: 1.25rem;
-    }
+.bloque-texto h3 {
+    margin-bottom: 1rem;
+    color: #b71c1c;
+    font-size: 1.25rem;
+    font-family: "Calibri", "Segoe UI", "Arial", sans-serif;
+    font-weight: 700;
+}
 
-    .bloque-texto p {
-        margin: 0.5rem 0;
-        font-size: 0.95rem;
-        color: #333;
-    }
+.bloque-texto p {
+    margin: 0.5rem 0;
+    font-size: 0.95rem;
+    color: #333;
+    font-family: "Calibri", "Segoe UI", "Arial", sans-serif;
+}
 
-    .bloque-texto a {
-        color: #1976d2;
-        text-decoration: none;
-        font-weight: 600;
-    }
+.bloque-texto a {
+    color: #1976d2;
+    text-decoration: none;
+    font-weight: 600;
+    font-family: "Calibri", "Segoe UI", "Arial", sans-serif;
+}
 
-        .bloque-texto a:hover {
-            text-decoration: underline;
-        }
+.bloque-texto a:hover {
+    text-decoration: underline;
+}
 
 .gpch-loader-flor {
     display: block;
@@ -57,7 +60,6 @@
     from {
         transform: rotate(0deg);
     }
-
     to {
         transform: rotate(360deg);
     }
@@ -76,24 +78,25 @@
     z-index: 9999;
 }
 
-    .gpch-transicion-wrapper svg {
-        animation: flor-rotar 0.7s linear infinite;
-    }
+.gpch-transicion-wrapper svg {
+    animation: flor-rotar 0.7s linear infinite;
+}
 
 @keyframes flor-rotar {
     from {
         transform: rotate(0deg);
     }
-
     to {
         transform: rotate(360deg);
     }
 }
 
+/* === Fuente global corporativa === */
 html, body {
     height: 100%;
     margin: 0;
     background-color: #f5f7fa; /* fondo institucional gris claro */
+    font-family: "Calibri", "Segoe UI", "Arial", sans-serif; /* tipografía corporativa */
 }
 
 .gpch-layout {
@@ -106,21 +109,18 @@ html, body {
     background-position: center center;
 }
 
-
 .gpch-body {
     flex: 1;
     display: flex;
     flex-direction: column;
     justify-content: center;
-    /*padding: 2rem 1rem;*/
-    /*background-color: #f5f7fa;*/
     box-sizing: border-box;
 }
 
 .gpch-footer {
     margin-top: auto;
+    font-family: "Calibri", "Segoe UI", "Arial", sans-serif;
 }
-
 
 .florselector-wrapper {
     position: fixed;
@@ -146,15 +146,25 @@ html, body {
     clip: rect(0,0,0,0);
     border: 0;
 }
+
+/* === Identidad corporativa === */
 .identidad-title {
     color: #b71c1c;
     font-weight: 800;
     font-size: 2.2rem;
     text-transform: uppercase;
     margin-bottom: 1.5rem;
+    font-family: "Calibri", "Segoe UI", "Arial", sans-serif;
+}
+
+/* === Ajuste de títulos y subtítulos === */
+.brand,
+.subtitle {
+    font-family: "Calibri", "Segoe UI", "Arial", sans-serif;
 }
 
 .bloque-texto strong {
     font-weight: 700; /* o 600 si prefieres menos grueso */
     color: #000; /* opcional, para reforzar contraste */
+    font-family: "Calibri", "Segoe UI", "Arial", sans-serif;
 }

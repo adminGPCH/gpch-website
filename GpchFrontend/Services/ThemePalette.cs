@@ -25,7 +25,7 @@ namespace GpchFrontend.Services
         {
             "rosado" => "#3E3A36",
             "burdeos" => "#E8D5B7",
-            "rojo" => "#fab069",
+            "rojo" => "#F5DEB3",
             "amarillo" => "#3B2F00",
             "verde" => "#0e2b0c",
             "azul" => "#080933",

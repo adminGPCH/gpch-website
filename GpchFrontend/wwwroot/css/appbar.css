@@ -6,6 +6,11 @@
     height: var(--gpch-appbar-height);
 }
 
+.gpch-appbar {
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px); /* soporte Safari */
+}
+
 
 .gpch-appbar {
     background-color: #2f538e;

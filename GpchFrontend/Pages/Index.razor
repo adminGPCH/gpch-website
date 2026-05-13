@@ -1,9 +1,11 @@
 ﻿@page "/"
 @using GpchFrontend.Components
+@using GpchFrontend.Services
+
 @inject GpchFrontend.Services.ThemeService Theme
 @inject GpchFrontend.Services.ThemeService ThemeService
 @inject NavigationManager Navigation
-@using GpchFrontend.Services
+@inject IJSRuntime JS
 
 <link href="css/login.css" rel="stylesheet" />
 
@@ -13,9 +15,13 @@
      style="@ObtenerEstiloFondo()">
 
     <section class="gpch-bloque">
-        <NavLink href="/">
-            <img src="images/logo_gpch-solo-t.png" alt="GPCH Logo" class="logo" />
+        <NavLink href="/" @onclick="PlayLogoClickSound">
+            <img src="images/logo_gpch-solo-t.png"
+                 alt="GPCH Logo"
+                 class="logo"
+                 @onmouseover="PlayLogoHoverSound" />
         </NavLink>
+
 
         <h2 class="brand" style="color:@TitleColor; text-shadow:@($"1px 1px 2px {TitleContrast}")">
             Goerlich Pharma Chile Ltda.
@@ -132,4 +138,15 @@
 
         return baseStyle + transicion;
     }
+
+    private async Task PlayLogoHoverSound()
+    {
+        await JS.InvokeVoidAsync("playSound", "/sounds/gpch_menu_hover.mp3");
+    }
+
+    private async Task PlayLogoClickSound()
+    {
+        await JS.InvokeVoidAsync("playSound", "/sounds/gpch_menu_clic.mp3");
+    }
+
 }

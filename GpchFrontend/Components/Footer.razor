@@ -1,7 +1,7 @@
 ﻿@inject GpchFrontend.Services.ThemeService Theme
 @using GpchFrontend.Services
 
-<footer class="gpch-footer" style="@($"background-color:{ColorTema};")">
+<footer class="gpch-footer" style="@($"background-color:{ToRgba(ColorTema, 0.75)}")">
     <div class="footer-content">
         <p style="color:@ColorContraste">
             © @DateTime.Now.Year Goerlich Pharma Chile Ltda. Propiedad intelectual protegida.
@@ -25,5 +25,11 @@
         ColorTema = ThemePalette.GetColor(tema);
         ColorContraste = ThemePalette.GetContraste(tema);
         StateHasChanged();
+    }
+
+    private string ToRgba(string hex, double alpha)
+    {
+        var color = System.Drawing.ColorTranslator.FromHtml(hex);
+        return $"rgba({color.R}, {color.G}, {color.B}, {alpha})";
     }
 }
