@@ -141,6 +141,7 @@
 
     private async Task PlayLogoHoverSound()
     {
+        Theme.CambiarTema("azul");
         await JS.InvokeVoidAsync("playSound", "/sounds/gpch_menu_hover.mp3");
     }
 
