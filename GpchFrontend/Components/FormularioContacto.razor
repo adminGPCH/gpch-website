@@ -1,5 +1,8 @@
 ﻿@using Microsoft.JSInterop
+@using GpchFrontend.Services
+
 @inject IJSRuntime JS
+@inject GpchFrontend.Services.ThemeService Theme
 
 <div class="formulario-wrapper">
     <form class="formulario-card">
@@ -34,7 +37,7 @@
         </div>
 
         <div class="formulario-button">
-            <button type="button" @onclick="Enviar" disabled="@isSending" class="btn btn-primary">
+            <button type="button" @onclick="Enviar" disabled="@isSending" class="btn btn-primary" style=@($"background-color:{ColorTema}; color:{ColorContraste};")>
                 @(isSending ? "Enviando..." : "Enviar")
             </button>
 
@@ -56,12 +59,29 @@
     private ElementReference emailRef;
     private ElementReference mensajeRef;
 
+    private string ColorTema = "#b71c1c";
+    private string ColorContraste = "#ffffff";
+
     [Parameter] public EventCallback<MailRequest> OnEnviar { get; set; }
 
     private string? MensajeError;
     private string? MensajeExito;
     private int CaracteresMensaje = 0;
     private bool isSending = false;
+
+    protected override async Task OnInitializedAsync()
+    {
+        Theme.OnThemeChanged += ActualizarEstilos;
+        ActualizarEstilos();
+    }
+
+    private void ActualizarEstilos()
+    {
+        var tema = Theme.TemaActual;
+        ColorTema = ThemePalette.GetColor(tema) ?? "#b71c1c";
+        ColorContraste = ThemePalette.GetContraste(tema) ?? "#ffffff";
+        StateHasChanged();
+    }
 
     private async Task Enviar()
     {
