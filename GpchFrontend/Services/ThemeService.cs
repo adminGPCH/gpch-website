@@ -7,6 +7,8 @@
 
         public event Action? OnThemeChanged;
         public bool CarruselActivo { get; set; } = true;
+        public bool SonidoActivo { get; set; } = false;
+
 
         public void CambiarTema(string nuevoTema)
         {

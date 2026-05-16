@@ -58,6 +58,7 @@
             ActivePetal = id;
 
             // Sonido al hover
+            if (Theme.SonidoActivo)
             await JS.InvokeVoidAsync("playSound", "/sounds/gpch_petal_hover.mp3");
         }
         else
@@ -72,6 +73,7 @@
         if (petalo is null) return;
 
         // Sonido al clic
+        if (Theme.SonidoActivo)
         await JS.InvokeVoidAsync("playSound", "/sounds/gpch_petal_clic.mp3");
 
         Navigation.NavigateTo(petalo.Ruta);

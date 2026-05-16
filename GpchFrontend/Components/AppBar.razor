@@ -68,21 +68,25 @@
     private async Task PlayLogoHoverSound()
     {
         Theme.CambiarTema("azul");
+        if (Theme.SonidoActivo)
         await JS.InvokeVoidAsync("playSound", "/sounds/gpch_menu_hover.mp3");
     }
 
     private async Task PlayLogoClickSound()
     {
+        if (Theme.SonidoActivo)
         await JS.InvokeVoidAsync("playSound", "/sounds/gpch_menu_clic.mp3");
     }
 
     private async Task PlayMenuHoverSound()
     {
+        if (Theme.SonidoActivo)
         await JS.InvokeVoidAsync("playSound", "/sounds/gpch_menu_hover.mp3");
     }
 
     private async Task PlayMenuClickSound()
     {
+        if (Theme.SonidoActivo)
         await JS.InvokeVoidAsync("playSound", "/sounds/gpch_menu_clic.mp3");
     }
 }

@@ -8,6 +8,7 @@
 @inject IJSRuntime JS
 
 <link href="css/login.css" rel="stylesheet" />
+<link href="css/carrusel.css" rel="stylesheet" />
 
 <CarruselTematico @ref="Carrusel" OnImagenCambiada="ActualizarFondo" />
 
@@ -22,36 +23,45 @@
                  @onmouseover="PlayLogoHoverSound" />
         </NavLink>
 
-
         <h2 class="brand" style="color:@TitleColor; text-shadow:@($"1px 1px 2px {TitleContrast}")">
             Goerlich Pharma Chile Ltda.
         </h2>
 
-        <p class="subtitle" style=@($"color:{ColorContraste}") title="sin clic cambia el color, clic abre la página">Cada pétalo revela un color y una historia…</p>
+        <p class="subtitle" style=@($"color:{ColorContraste}")
+           title="sin clic cambia el color, clic abre la página">
+            Cada pétalo revela un color y una historia…
+        </p>
 
         <div class="flower-container">
-            <ThemeFlower Size="300" />
+            <ThemeFlower Size="300"/>
         </div>
-
-        <div class="gpch-domo-control">
-            <button class="domo-btn @(ThemeService.CarruselActivo ? "activo" : "")" @onclick="ToggleCarrusel">
-                @(ThemeService.CarruselActivo ? "||" : ">>")
-            </button>
-        </div>
-
     </section>
+
+    <!-- Botón fijo abajo a la derecha -->
+    <div class="gpch-domo-control">
+        <!-- Botón carrusel -->
+        <button class="domo-btn @(ThemeService.CarruselActivo ? "activo" : "")" @onclick="ToggleCarrusel">
+            @(ThemeService.CarruselActivo ? "||" : ">>")
+        </button>
+
+        <!-- Botón sonido -->
+        <button class="domo-btn @(ThemeService.SonidoActivo ? "activo" : "")" @onclick="ToggleSonido" style="margin-right: 8px;">
+            @(ThemeService.SonidoActivo ? "🔊" : "🔇")
+        </button>
+    </div>
+
+
 </div>
 
 @code {
     private string TitleColor = "#FFFFFF";
     private string TitleContrast = "#FFFFFF";
     private string ColorContraste = "#000000";
-
     private string FondoTema = ThemePalette.GetColor("azul");
-
     private bool animating = false;
-
     private CarruselTematico? Carrusel;
+
+    // private bool SonidoActivo = false; // por defecto desactivado
 
     protected override void OnInitialized()
     {
@@ -75,13 +85,9 @@
         if (firstRender && Carrusel is not null)
         {
             if (ThemeService.CarruselActivo)
-            {
                 Carrusel.ActivarCarrusel();
-            }
             else
-            {
                 Carrusel.DetenerCarrusel();
-            }
         }
         return Task.CompletedTask;
     }
@@ -91,10 +97,9 @@
         if (!string.IsNullOrWhiteSpace(nuevaImagen))
         {
             var esHome = string.IsNullOrEmpty(Navigation.ToBaseRelativePath(Navigation.Uri));
-
             if (!esHome)
             {
-                Carrusel?.DetenerAnimacion(); // ← blindaje
+                Carrusel?.DetenerAnimacion();
                 return;
             }
 
@@ -121,8 +126,6 @@
         }
     }
 
-
-
     private string ObtenerEstiloFondo()
     {
         var baseStyle = $@"
@@ -142,12 +145,19 @@
     private async Task PlayLogoHoverSound()
     {
         Theme.CambiarTema("azul");
+        if (ThemeService.SonidoActivo)
         await JS.InvokeVoidAsync("playSound", "/sounds/gpch_menu_hover.mp3");
     }
 
     private async Task PlayLogoClickSound()
     {
+        if (ThemeService.SonidoActivo)
         await JS.InvokeVoidAsync("playSound", "/sounds/gpch_menu_clic.mp3");
+    }
+    
+    private void ToggleSonido()
+    {
+        ThemeService.SonidoActivo = !ThemeService.SonidoActivo;
     }
 
 }

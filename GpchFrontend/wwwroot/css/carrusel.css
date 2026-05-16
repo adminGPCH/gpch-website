@@ -1,7 +1,7 @@
 ﻿.gpch-domo-control {
-    position: absolute;
-    bottom: 20px;
-    right: 20px;
+    position: fixed;
+    bottom: 72px; /* justo sobre el footer */
+    right: 24px;
     z-index: 9999;
 }
 
