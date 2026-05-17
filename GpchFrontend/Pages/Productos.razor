@@ -23,10 +23,203 @@
         <p class="fw-bold mb-0">Explore nuestras categorías y descubra lo que tenemos para usted.</p>
     </section>
 
-    <!-- 🔹 Tarjetas -->
-    <div class="gpch-grid">
-        @if (categorias != null && categorias.Any())
-        {
+    <!-- 🔹 Lista estática para SEO -->
+    @if (categorias == null)
+    {
+        <div class="gpch-static-list">
+            <h2>Cápsulas de gelatina dura</h2>
+            <ul>
+                <li>Cápsulas Azul Blanco</li>
+                <li>Cápsulas Sea Azul Blanco</li>
+                <li>Cápsulas Indigo Azul Blanco</li>
+                <li>Cápsulas Indigo Blue / Indigo Blue</li>
+                <li>Cápsulas Verde Blanco</li>
+                <li>Cápsulas Verde Verde</li>
+                <li>Cápsulas Verde Plomo</li>
+                <li>Cápsulas Verde Blanco Elongada</li>
+                <li>Cápsulas Salmón Blanco</li>
+                <li>Cápsulas Salmón Salmón</li>
+                <li>Cápsulas Rojo Rojo</li>
+                <li>Cápsulas Rojo Blanco</li>
+                <li>Cápsulas Transparente Transparente</li>
+                <li>Cápsulas Vegetales</li>
+                <li>Cápsulas Blanco Blanco</li>
+                <li>Cápsulas Amarillo Amarillo</li>
+                <li>Cápsulas Pink Pink</li>
+                <li>Cápsulas Café Café</li>
+                <li>Cápsulas Plomo Plomo</li>
+            </ul>
+
+            <h2>Cápsulas de gelatina blanda</h2>
+            <ul>
+                <li>ACEITE DE BACALAO</li>
+                <li>ACEITE DE COCO</li>
+                <li>ACEITE DE COCO MCT SOFTGEL color transparente</li>
+                <li>ACEITE DE MCT</li>
+                <li>ARÁNDANO</li>
+                <li>ASTAXANTINA</li>
+                <li>BLACK CUMIN OIL SOFTGEL</li>
+                <li>CALCIUM + VITAMINA D3+COLÁGENO</li>
+                <li>CALCIUM+VD3 SOFTGEL</li>
+                <li>CÁPSULAS DE CALCIO SOFTGEL</li>
+                <li>CHLOROPHYLL SOFTGEL</li>
+                <li>CLOROFILA + SPIRULINA</li>
+                <li>CO Q10 SOFTGEL Vit C, biotina, licopeno</li>
+                <li>COENZIMA Q10</li>
+                <li>COENZIMA Q10 (COMPLEJO B+BIOTINA+LICOPENO)</li>
+                <li>COLÁGENO + ASTAXANTINA</li>
+                <li>COLÁGENO MARINO</li>
+                <li>Fish OIL (EPA/DHA 400/200 EE)</li>
+                <li>KRILL</li>
+                <li>L ARGININA + BCAAA</li>
+                <li>L CARNITINE SOFTGEL (Super Slim)</li>
+                <li>L CARNITINE TARTRATE + TÉ VERDE+CLA</li>
+                <li>L CARTININE TRIPLE POTENCIA 500mg</li>
+                <li>LECITINA DE SOYA FOSFOLECITINA (1.200mg)</li>
+                <li>LECITINA DE SOYA TRIPLE POTENCIA (500mg)</li>
+                <li>MULTIVITAMÍNICO</li>
+                <li>OMEGA 3 (FISH OIL 18/12)</li>
+                <li>OMEGA 369</li>
+                <li>OMEGA KIDS (FISH OIL 10/40)</li>
+                <li>PEPA DE CALABAZA + VITAMINA E</li>
+                <li>PUMPKIN SEED SOFT</li>
+                <li>SPIRULINA + CHORELLA</li>
+                <li>VITAMINA B + BIOTINA</li>
+                <li>VITAMINA E</li>
+                <li>VITAMINA K</li>
+            </ul>
+
+            <h2>Minerales</h2>
+            <ul>
+                <li>Citrato de calcio</li>
+                <li>Citrato malato de calcio</li>
+                <li>Carbonato de calcio</li>
+                <li>Acetato de calcio</li>
+                <li>Óxido de calcio</li>
+                <li>Glicinato de calcio</li>
+                <li>Gluconato de calcio</li>
+                <li>Lactato de calcio</li>
+                <li>Orotato de calcio</li>
+                <li>Malato de calcio</li>
+                <li>Citrato de magnesio en polvo</li>
+                <li>Gluconato de magnesio en polvo</li>
+                <li>Óxido de magnesio en polvo</li>
+                <li>Carbonato de magnesio</li>
+                <li>Glicinato de magnesio</li>
+                <li>Citrato de potasio cristalizado en polvo</li>
+                <li>Yoduro de potasio 3% en polvo</li>
+                <li>Sorbato de potasio en polvo</li>
+                <li>Gluconato de zinc en polvo</li>
+                <li>Óxido de zinc en polvo</li>
+                <li>Citrato de zinc</li>
+                <li>Glicinato de zinc</li>
+                <li>Malato de zinc</li>
+            </ul>
+
+            <h2>Vitaminas</h2>
+            <ul>
+                <li>Ácido ascórbico</li>
+                <li>Ácido ascórbico granular</li>
+                <li>Palmitato de ascorbilo</li>
+                <li>Biotina (vitamina B7) en polvo</li>
+                <li>Coenzima Q10 en polvo</li>
+                <li>Vitamina E (DL-alfa-tocoferil 50%)</li>
+                <li>Ácido fólico 100% puro (vitamina B9) en polvo</li>
+                <li>Fosfato de piridoxal-5 (P5P) en polvo</li>
+                <li>Pirroloquinolina quinona (PQQ) 100% pura en polvo</li>
+                <li>Riboflavina-5-fosfato sodio (vitamina B2)</li>
+                <li>Ascorbato de sodio</li>
+                <li>Vitamina B1 (clorhidrato de tiamina) en polvo</li>
+                <li>Vitamina B2 (riboflavina) en polvo</li>
+                <li>Vitamina B3 (niacinamida) en polvo</li>
+                <li>Vitamina B5 (pantotenato de calcio) en polvo</li>
+                <li>Vitamina B6 (piridoxina HCL) en polvo</li>
+                <li>Vitamina B12 (metilcobalamina 99,8% pura) en polvo</li>
+                <li>Vitamina B12 (cianocobalamina 99,8% pura) en polvo</li>
+                <li>Vitamina B12 1% (cianocobalamina) en polvo</li>
+                <li>Vitamina D3 (colecalciferol) en polvo</li>
+                <li>Vitamina D3 (vegana) en polvo</li>
+            </ul>
+
+            <h2>Aminoácidos</h2>
+            <ul>
+                <li>Sulfato de agmatina en polvo</li>
+                <li>Beta alanina</li>
+                <li>Betaína anhidra</li>
+                <li>Betaína HCL</li>
+                <li>Creatina monohidratada</li>
+                <li>Creatina clorhidrato HCL</li>
+                <li>Ácido D-aspártico</li>
+                <li>D-fenilalanina</li>
+                <li>DL-metionina</li>
+                <li>DL-fenilalanina</li>
+                <li>Ácido gamma aminobutírico (GABA)</li>
+                <li>Glicina</li>
+                <li>Aminoácidos de cadena ramificada instantáneos (IBCAA)</li>
+                <li>L-alanina</li>
+                <li>L-arginina base</li>
+                <li>L-arginina HCL</li>
+                <li>L-arginina alfa-cetoglutarato</li>
+                <li>L-citrulina</li>
+                <li>L-citrulina DL-malato 2:1</li>
+                <li>L-cisteína HCL mono</li>
+                <li>Ácido L-glutámico HCL</li>
+                <li>L-glutatión reducido</li>
+                <li>L-histidina base</li>
+                <li>L-histidina HCL</li>
+                <li>L-isoleucina</li>
+                <li>L-leucina</li>
+                <li>L-lisina en polvo</li>
+                <li>Ácido L-málico</li>
+                <li>L-metionina</li>
+                <li>L-Norvalina</li>
+                <li>L-ornitina AKG 2:1</li>
+                <li>L-ornitina clorhidrato</li>
+                <li>L-fenilalanina</li>
+                <li>L-prolina</li>
+                <li>L-serina</li>
+                <li>L-taurina</li>
+                <li>L-teanina</li>
+                <li>L-treonina</li>
+                <li>L-triptófano</li>
+                <li>L-tirosina</li>
+                <li>L-valina</li>
+                <li>Clorhidrato de éster etílico de creatina micronizada (CEE)</li>
+                <li>Malato de éster etílico de creatina micronizada (CEEM)</li>
+                <li>N-acetil L-cisteína en polvo</li>
+                <li>N-acetil L-tirosina</li>
+                <li>S-acetil L-glutatión</li>
+                <li>Disulfato de S-adenosil-L-metionina</li>
+            </ul>
+
+            <h2>Extractos de Hierbas</h2>
+            <ul>
+                <li>Licopeno 10% Granulado</li>
+                <li>Licopeno 5%, 10% en polvo</li>
+                <li>Extracto de Flor de Caléndula luteína 45%</li>
+                <li>Extracto de Caléndula zeaxantina 10%</li>
+                <li>Extracto de Cardo Mariano 80% UV</li>
+                <li>Extracto de Fruta del Monje 20% MV</li>
+                <li>Hoja de Moringa Oleifera en Polvo Orgánico</li>
+                <li>Extracto de Mucuna Pruriens 20% levodopa</li>
+                <li>Extracto de Hoja de Morera</li>
+                <li>Morera en Polvo Orgánico</li>
+                <li>Extracto de Naringina 98%</li>
+                <li>Fruta de Noni en Polvo</li>
+                <li>Extracto de Avena 70% beta-glucano</li>
+                <li>Extracto de Hoja de Olivo 10%, 40%</li>
+                <li>Papaya en Polvo Orgánico</li>
+                <li>Extracto de corteza de pino 95%</li>
+                <li>Piña orgánica en polvo</li>
+                <li>Extracto de Polygonum cuspidatum al 50%, 98% de resveratrol</li>
+                <li>Proteína de semilla de calabaza 60%</li>
+            </ul>
+        </div>
+    }
+    else
+    {
+        <!-- 🔹 Render dinámico con JSON -->
+        <div class="gpch-grid">
             @foreach (var cat in categorias)
             {
                 <div class="gpch-card">
@@ -34,9 +227,11 @@
                         <h5 style=@($"color:{ColorContraste};")>@cat.Title</h5>
                     </div>
 
-                    @if (!string.IsNullOrEmpty(cat.ImagenUrl))
+                    @if (!string.IsNullOrEmpty(cat.ImagenUrl) && !string.IsNullOrEmpty(cat.UrlCategoria))
                     {
-                        <img src="@cat.ImagenUrl" alt="@cat.Title" />
+                        <a href="@cat.UrlCategoria">
+                            <img src="@cat.ImagenUrl" alt="@cat.Title" class="gpch-card-img" />
+                        </a>
                     }
 
                     @if (!string.IsNullOrEmpty(cat.Abstract))
@@ -53,13 +248,12 @@
                     }
                 </div>
             }
-        }
-        else
-        {
-            <p class="text-center">No hay categorías disponibles en este momento.</p>
-        }
-    </div>
+
+        </div>
+    }
+
 </div>
+
 
 @code {
     private List<CategoriaProducto> categorias;

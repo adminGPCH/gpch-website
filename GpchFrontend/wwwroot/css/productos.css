@@ -125,3 +125,12 @@
     text-transform: uppercase;
     margin-bottom: 1.5rem;
 }
+
+.gpch-card-img {
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
+
+    .gpch-card-img:hover {
+        transform: scale(1.05);
+    }
