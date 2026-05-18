@@ -3,55 +3,61 @@
 
 	<!-- Página principal -->
 	<url>
-		<loc>https://gpch.cl/</loc>
+		<loc>https://gpch.cl/index.html</loc>
 		<priority>1.0</priority>
 	</url>
 
 	<!-- Catálogo general -->
 	<url>
-		<loc>https://gpch.cl/productos</loc>
+		<loc>https://gpch.cl/productos.html</loc>
 		<priority>0.9</priority>
 	</url>
-	
-	<!-- Identidad -->
+
+	<!-- Identidad corporativa -->
 	<url>
-		<loc>https://gpch.cl/identidad</loc>
+		<loc>https://gpch.cl/identidad.html</loc>
 		<priority>0.7</priority>
 	</url>
 
 	<!-- Contacto -->
 	<url>
-		<loc>https://gpch.cl/contacto</loc>
+		<loc>https://gpch.cl/contacto.html</loc>
 		<priority>0.8</priority>
 	</url>
 
-	<!-- Categorías dinámicas -->
+	<!-- Categorías del catálogo -->
+	<!-- Aminoácidos -->
 	<url>
-		<loc>https://gpch.cl/productos/aminoacidos</loc>
+		<loc>https://gpch.cl/productos/aminoacidos.html</loc>
 		<priority>0.8</priority>
 	</url>
+	<!-- Vitaminas -->
 	<url>
-		<loc>https://gpch.cl/productos/vitaminas</loc>
+		<loc>https://gpch.cl/productos/vitaminas.html</loc>
 		<priority>0.8</priority>
 	</url>
+	<!-- Minerales -->
 	<url>
-		<loc>https://gpch.cl/productos/minerales</loc>
+		<loc>https://gpch.cl/productos/minerales.html</loc>
 		<priority>0.8</priority>
 	</url>
+	<!-- Cápsulas blandas -->
 	<url>
-		<loc>https://gpch.cl/productos/capsulas-blandas</loc>
+		<loc>https://gpch.cl/productos/capsulas-blandas.html</loc>
 		<priority>0.8</priority>
 	</url>
+	<!-- Cápsulas duras -->
 	<url>
-		<loc>https://gpch.cl/productos/capsulas-duras</loc>
+		<loc>https://gpch.cl/productos/capsulas-duras.html</loc>
 		<priority>0.8</priority>
 	</url>
+	<!-- Extractos de hierbas -->
 	<url>
-		<loc>https://gpch.cl/productos/extractos-hierbas</loc>
+		<loc>https://gpch.cl/productos/extractos-hierbas.html</loc>
 		<priority>0.8</priority>
 	</url>
 
-	<!-- PDFs -->
+	<!-- Documentos PDF -->
 	<url>
 		<loc>https://gpch.cl/docs/gpch_aminoacidos.pdf</loc>
 		<priority>0.6</priority>
