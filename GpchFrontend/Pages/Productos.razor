@@ -24,9 +24,7 @@
     </section>
 
     <!-- 🔹 Lista estática para SEO -->
-    @if (categorias == null)
-    {
-        <div class="gpch-static-list">
+    <div class="gpch-static-list seo-only">
             <h2>Cápsulas de gelatina dura</h2>
             <ul>
                 <li>Cápsulas Azul Blanco</li>
@@ -215,8 +213,8 @@
                 <li>Proteína de semilla de calabaza 60%</li>
             </ul>
         </div>
-    }
-    else
+
+    @if (categorias != null)
     {
         <!-- 🔹 Render dinámico con JSON -->
         <div class="gpch-grid">

@@ -168,3 +168,18 @@ html, body {
     color: #000; /* opcional, para reforzar contraste */
     font-family: "Calibri", "Segoe UI", "Arial", sans-serif;
 }
+
+/* Oculta el bloque estático al usuario */
+.seo-only {
+    display: none;
+}
+
+/* Pero sigue visible para Googlebot y otros rastreadores */
+@media (prefers-reduced-motion: reduce) {
+    .seo-only {
+        display: block;
+        visibility: visible;
+        height: auto;
+        overflow: visible;
+    }
+}
